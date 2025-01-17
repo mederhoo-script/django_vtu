@@ -36,7 +36,7 @@
             <div class="card-body text-white">
                 <div class="d-flex justify-content-between">
                     <h1>Hi, {{ user.first_name }}</h1>
-                    <h5>({{ user.balance }})</h5>
+                    <h5>(&#8358;{{ user.balance }})</h5>
                 </div>
                 <h2 class="mt-4">&#8358;{{ user.balance|floatformat:2 }}</h2>
                 <h4 class="font-weight-light">Wallet Balance</h4>
@@ -63,7 +63,8 @@
                         <p>Buy Airtime</p>
                     </a>
                     <a href="{% url 'buy_data_pin' %}" class="col-3">
-                        <i class="fa fa-mobile fa-2x"></i>
+                        <i class="fa fa-cloud fa-2x"></i>
+
                         <p>Data Card</p>
                     </a>
                     <a href="{% url 'buy_data' %}" class="col-3">

@@ -81,7 +81,7 @@ class ApiConfig(models.Model):
         db_table = 'apiconfigs'
 
     def __str__(self):
-        return f"{self.name} - {self.value}"
+        return self.value
 
 
 class ApiLink(models.Model):

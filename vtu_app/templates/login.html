@@ -44,6 +44,20 @@
             <h2>User Login</h2>
             <p>Please enter your credentials to log in.</p>
         </div>
+        <!-- Display messages -->
+    {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+                <div class="alert
+                    {% if message.tags == 'success' %}alert-success
+                    {% elif message.tags == 'error' %}alert-danger
+                    {% else %}alert-secondary
+                    {% endif %} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+            {% endif %}
         <form method="POST">
             {% csrf_token %}
 
