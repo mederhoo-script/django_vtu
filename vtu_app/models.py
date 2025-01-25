@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from django.utils.timezone import now
 
 class CustomUser(AbstractUser):
     email = models.EmailField(unique=True)
@@ -15,6 +16,29 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+class Transactions(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='transactions')
+    service_name = models.CharField(max_length=100)
+    transaction_id = models.CharField(max_length=50, unique=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    status = models.CharField(max_length=20, choices=[
+        ('pending', 'Pending'),
+        ('completed', 'Completed'),
+        ('failed', 'Failed')
+    ])
+    date = models.DateTimeField(default=now)
+    description = models.TextField(blank=True, null=True)
+
+    class Meta:
+        db_table = 'transactions'
+        ordering = ['-date']
+
+    def __str__(self):
+        return f"{self.transaction_id} - {self.service_name} - {self.amount}"
+
+
+
 
 
 class Account(models.Model):

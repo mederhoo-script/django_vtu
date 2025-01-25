@@ -10,7 +10,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from .models import (
     Airtime, AirtimePinPrice, AlphaTopupPrice, ApiConfig, ApiLink, CableID, CablePlan,
-    Contact, Crypto, DataPin, DataPlan, DataToken, ElectricityID, ExamID, NetworkID, CustomUser, Account
+    Contact, Crypto, DataPin, DataPlan, DataToken, ElectricityID, ExamID, NetworkID, CustomUser, Account,Transactions
 )
 def generate_transaction_id():
     # Get current timestamp
@@ -87,18 +87,15 @@ def fund_wallet(request):
 
 @login_required
 def buy_airtime(request):
-    message = ''
-    message_type = 'success'
     if request.method == 'POST':
         network = request.POST.get('network')
         phone = request.POST.get('phone')
         amount = Decimal(request.POST.get('amount'))
+        bypass = request.POST.get('ported_number') == 'on'
         user = request.user
 
         if user.balance >= amount:
-            # Deduct amount from user balance
-            user.balance -= amount
-            user.save()
+
 
             # Generate a unique transaction ID for tracking
             request_id = generate_transaction_id()
@@ -107,13 +104,12 @@ def buy_airtime(request):
             payload = {
                 'network': network,
                 'phone': phone,
-                'plan_type': 'VTU',  # Assuming this is always the case for airtime top-up
-                'bypass': False,  # Assuming this is always false for now
+                'plan_type': 'VTU',
+                'bypass': bypass,
                 'amount': amount,
                 'request-id': request_id
             }
 
-            # Define the headers (replace with the actual API key)
             api_key = ApiConfig.objects.get(name='data_api')
             headers = {
                 'Authorization': f'Token {api_key}',
@@ -125,29 +121,37 @@ def buy_airtime(request):
             try:
                 response = requests.post(url, json=payload, headers=headers)
                 res = response.json()
+                print(f"bypass: {bypass}{res}")
 
-                if response.status_code == 200 and res.get('status') == 'success':
+                if res.get('status') == 'fail':
                     # Airtime purchase successful
-                    message = 'Airtime purchased successfully!'
-                    message_type = 'success'
+                    # Deduct amount from user balance
+                    user.balance -= amount
+                    user.save()
+                    # Create a transaction record
+                    transaction = Transactions.objects.create(
+                        user=user,
+                        service_name='Airtime',
+                        transaction_id=request_id,
+                        amount=amount,
+                        status='completed',
+                        description=f"Airtime of {amount} for {phone} on {network} network."
+                    )
+                    # Add success message
+                    messages.success(request, 'Airtime purchased successfully!')
                 else:
                     # Airtime purchase failed (API response returned 'fail' status)
-                    message = f"Failed to purchase airtime: {res.get('message', 'Unknown error')}"
-                    message_type = 'error'
+                    messages.error(request, f"Failed to purchase airtime: {res.get('message', 'Unknown error')}")
             except requests.exceptions.RequestException as e:
                 # Handle any request-related errors (e.g., network issues)
-                message = f"Error: Unable to complete the purchase. {str(e)}"
-                message_type = 'error'
+                messages.error(request, f"Error: Unable to complete the purchase. {str(e)}")
         else:
             # Insufficient balance
-            message = 'Insufficient balance to complete the purchase.'
-            message_type = 'error'
+            messages.error(request, 'Insufficient balance to complete the purchase.')
 
-    context = {
-        'message': message,
-        'message_type': message_type,
-    }
-    return render(request, 'buy_airtime.html', context)
+        return redirect('buy_airtime')
+
+    return render(request, 'buy_airtime.html')
 
 
 @login_required
@@ -169,8 +173,9 @@ def get_data_plans(request):
 
 @login_required
 def buy_data(request):
+    # getting api key from database
     api_key = ApiConfig.objects.get(name='data_api')
-    message = ''
+
     if request.method == 'POST':
         network = request.POST.get('network')
         data_plan = request.POST.get('dataplan')
@@ -200,16 +205,30 @@ def buy_data(request):
         user = request.user
         if user.balance >= Decimal(amount_to_pay):
             try:
+                # integete the api to buy data
                 response = requests.post(url, json=payload, headers=headers)
+
                 res = response.json()
                 if res.get('status') == 'fail':
                     print('from succes if', res)
                     user.balance -= Decimal(amount_to_pay)
                     user.save()
+                    dis_data = DataPlan.objects.filter(datanetwork=network, planid=data_plan).first()
+
+                    if dis_data:
+                        # get history
+                        transaction = Transactions.objects.create(
+                            user=user,
+                            service_name=f"{dis_data.atype} Data",
+                            transaction_id=request_id,
+                            amount=Decimal(amount_to_pay),
+                            status='completed',
+                            description=f"{dis_data.name} {dis_data.atype} {dis_data.day} purchased for {phone}")
+                        print(transaction)
 
                     messages.success(request, 'You have successfully purchased data.')
                 else:
-                    messages.error(request, 'Data purchase failed due to an error.')
+                    messages.error(request, f"Data purchase failed: {res.get('message', 'Unknown error')}")
             except Exception as e:
                 print('Network error: API call failed')
                 messages.error(request, 'Network error: Unable to complete the request.')
@@ -227,6 +246,14 @@ def buy_data(request):
         'data': data,
     }
     return render(request, 'buy_data.html', context)
+
+@login_required
+def transactions(request):
+    transactions = Transactions.objects.all()
+    content = {
+        'datas': transactions,
+        }
+    return render(request, 'history.html', content)
 
 @login_required
 def cable_tv(request):
@@ -252,9 +279,6 @@ def recharge_pin(request):
 def w2bank(request):
     pass
 
-@login_required
-def transactions(request):
-    pass
 
 @login_required
 def pricing(request):
