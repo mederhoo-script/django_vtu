@@ -8,10 +8,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import RegistrationForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from .models import (
-    Airtime, AirtimePinPrice, AlphaTopupPrice, ApiConfig, ApiLink, CableID, CablePlan,
-    Contact, Crypto, DataPin, DataPlan, DataToken, ElectricityID, ExamID, NetworkID, CustomUser, Account,Transactions
-)
+from .models import *
+from django.core.paginator import Paginator
+
 def generate_transaction_id():
     # Get current timestamp
     timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
@@ -135,7 +134,8 @@ def buy_airtime(request):
                         transaction_id=request_id,
                         amount=amount,
                         status='completed',
-                        description=f"Airtime of {amount} for {phone} on {network} network."
+                        description=f"Airtime of {amount} for {phone} on {network} network.",
+                        api_return_message=res
                     )
                     # Add success message
                     messages.success(request, 'Airtime purchased successfully!')
@@ -223,7 +223,9 @@ def buy_data(request):
                             transaction_id=request_id,
                             amount=Decimal(amount_to_pay),
                             status='completed',
-                            description=f"{dis_data.name} {dis_data.atype} {dis_data.day} purchased for {phone}")
+                            description=f"{dis_data.name} {dis_data.atype} {dis_data.day} purchased for {phone}",
+                            api_return_message=res
+                            )
                         print(transaction)
 
                     messages.success(request, 'You have successfully purchased data.')
@@ -249,10 +251,18 @@ def buy_data(request):
 
 @login_required
 def transactions(request):
-    transactions = Transactions.objects.all()
+    user = request.user
+    transaction_list = Transactions.objects.filter(user=user)
+    paginator = Paginator(transaction_list, 20)  # Show 20 transactions per page
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    num = 1
+
     content = {
-        'datas': transactions,
-        }
+        'page_obj': page_obj,
+        'num': num
+    }
     return render(request, 'history.html', content)
 
 @login_required

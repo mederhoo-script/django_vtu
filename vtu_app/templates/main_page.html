@@ -10,17 +10,68 @@
 
     <!-- Optional: Include Font Awesome for icons -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+    <style>
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: #f8f9fa; }
+        .account-info, .balance, .section { padding: 10px; margin: 10px; background-color: #e9ecef; border-radius: 5px; }
+        /* .section-icons { display: flex; justify-content: space-around; } */
+        .navbar1 { display: flex; justify-content: space-around; padding: 10px; background-color: #dc0bf7b2; position: fixed; bottom: 0; width: 100%; }
+        .navbar1 a { text-decoration: none; color: #000; }
+        .copy-button, .fund-button { padding: 5px 10px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+        
+
+        .section-icons {
+    display: flex;
+    flex-wrap: wrap;  /* Wraps icons when space is limited */
+           /* Space between icons */
+    justify-content: center; /* Centers icons in the container */
+    padding: 10px;
+    background-color: #f9f9f9; 
+}
+
+.section-icons span {
+    flex: 1 1 calc(25% - 15px); /* 4 icons per row (25%) with gap adjustment */
+    max-width: 90px;  /* Set max size for icons */
+    text-align: center; 
+    margin-bottom: 10px;
+}
+
+.icon {
+    width: 100%;  /* Makes icons responsive within the span */
+    max-width: 70px; /* Limits icon size */
+    height: auto;
+    transition: transform 0.3s ease-in-out; /* Smooth hover effect */
+}
+
+.icon:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+}
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    .section-icons span {
+        flex: 1 1 calc(25% - 15px); /* 4 icons per row on tablets and mobiles */
+    }
+}
+
+@media (max-width: 480px) {
+    .section-icons span {
+        flex: 1 1 calc(25% - 10px); /* 4 icons per row on smaller devices */
+    }
+}
+
+
+
+    </style>
+
 </head>
 <body class="bg-light">
 
     <!-- Navigation Bar -->
-       <nav class="navbar navbar-expand-lg" style="background-color: blue;">
+       <nav class="navbar navbar-expand-sm" style="background-color: rgb(119, 0, 255);">
         <div class="container-fluid">
             <a class="navbar-brand text-white" href="#">MederhooVTU</a>
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link text-white" href="{% url 'profile' %}">Profile</a>
-                </li>
                 <li class="nav-item">
                     <a class="nav-link text-white" href="{% url 'logout' %}">Logout</a>
                 </li>
@@ -29,22 +80,24 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container mt-4">
+    <div class="container mt-4 mx-auto">
+
+      
 
         <!-- Wallet Card -->
-        <div class="card mb-4" style="background-image: linear-gradient(to top, blue 0%, green 100%);">
+        <div class="card mb-4" style="border-radius: 20px; background-image: linear-gradient(to top, blue 0%, green 100%);">
             <div class="card-body text-white">
                 <div class="d-flex justify-content-between">
-                    <h1>Hi, {{ user.first_name }}</h1>
-                    <h5>(&#8358;{{ user.balance }})</h5>
+                    <h1>Hi, {{ user.username }}</h1> 
+                    <div class="mt-2 text-end">
+                        <a href="{% url 'fund_wallet' %}" class="btn btn-light text-dark">
+                            <i class="fa fa-arrow-up"></i> Add Funds
+                        </a>
+                    </div>                
                 </div>
-                <h2 class="mt-4">&#8358;{{ user.balance|floatformat:2 }}</h2>
+                <h2 class="mt-3">&#8358;{{ user.balance|floatformat:2 }}</h2>
                 <h4 class="font-weight-light">Wallet Balance</h4>
-                <div class="mt-3">
-                    <a href="{% url 'fund_wallet' %}" class="btn btn-light text-dark">
-                        <i class="fa fa-arrow-up"></i> Add Funds
-                    </a>
-                </div>
+                
                 <div class="mt-4">
                     <a href="{% url 'fund_wallet' %}" class="text-white">
                         <strong>Click Here To Fund Your Wallet</strong>
@@ -52,6 +105,45 @@
                 </div>
             </div>
         </div>
+
+    
+        {% load static %}
+<div class="section">
+    <h3>Data</h3>
+    <div class="section-icons">
+        <span><img src="{% static 'images/mtn.png' %}" alt="MTN" class="icon"></span>
+        <span><img src="{% static 'images/airtel.png' %}" alt="Airtel" class="icon"></span>
+        <span><img src="{% static 'images/glo.png' %}" alt="Glo" class="icon"></span>
+        <span><img src="{% static 'images/9mobile.png' %}" alt="9mobile" class="icon"></span>
+    </div>
+</div>
+
+<div class="section">
+    <h3>Airtime</h3>
+    <div class="section-icons">
+        <span><img src="{% static 'images/icons/mtn.png' %}" alt="MTN" class="icon"></span>
+        <span><img src="{% static 'images/icons/airtel.png' %}" alt="Airtel" class="icon"></span>
+        <span><img src="{% static 'images/icons/glo.png' %}" alt="Glo" class="icon"></span>
+        <span><img src="{% static 'images/icons/9mobile.png' %}" alt="9mobile" class="icon"></span>
+    </div>
+</div>
+
+        
+    
+<div class="section">
+    <h3>Others</h3>
+    <div class="section-icons">
+        <span><img src="{% static 'images/icons/dstv.png' %}" alt="DSTV" class="icon"></span>
+        <span><img src="{% static 'images/icons/gotv.png' %}" alt="GOTV" class="icon"></span>
+        <span><img src="{% static 'images/icons/startimes.png' %}" alt="STARTIME" class="icon"></span>
+        <span><img src="{% static 'images/icons/ibedc.png' %}" alt="IBEDC" class="icon"></span>
+        <span><img src="{% static 'images/icons/ikeja.png' %}" alt="IKEJA" class="icon"></span>
+        <span><img src="{% static 'images/icons/kaduna.png' %}" alt="KADUNA" class="icon"></span>
+        <span><img src="{% static 'images/icons/neco.png' %}" alt="NECO" class="icon"></span>
+        <span><img src="{% static 'images/icons/waec.png' %}" alt="WAEC" class="icon"></span>
+    
+    </div>
+</div>
 
             <!-- Shortlinks Section -->
            <div class="card mb-4">
@@ -138,8 +230,16 @@
 
     </div>
 
+    <div class="navbar1">
+        <a href="#">Home</a>
+        <a href="#">Airtime</a>
+        <a href="#">Contact</a>
+        <a href="#">Data</a>
+        <a href="#">Menu</a>
+    </div>
+
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3">
+    <footer class="bg-dark text-white text-center py-3 mb-5">
         <p>&copy; 2025 Mederhoo. All rights reserved.</p>
     </footer>
 

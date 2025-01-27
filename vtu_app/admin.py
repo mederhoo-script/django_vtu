@@ -1,12 +1,10 @@
 from django.contrib import admin
-from .models import (
-    Airtime, AirtimePinPrice, AlphaTopupPrice, ApiConfig, ApiLink, CableID, CablePlan,
-    Contact, Crypto, DataPin, DataPlan, DataToken, ElectricityID, ExamID, NetworkID, CustomUser, Account
-)
+from .models import *
 
 # Registering each model individually
 admin.site.register(CustomUser)
 admin.site.register(Account)
+admin.site.register(Transactions)
 admin.site.register(Airtime)
 admin.site.register(AirtimePinPrice)
 admin.site.register(AlphaTopupPrice)

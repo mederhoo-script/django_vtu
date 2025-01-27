@@ -1,435 +1,335 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
 <head>
-    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Virtual Top-Up Platform - Instant Recharge, Data Plans & Bill Payments Made Easy">
+    <meta name="keywords" content="VTU, Mobile Recharge, Airtime, Data, Bill Payments, Online Recharge">
+    <title>MEDERSUB</title>
 
-    <!--for TAWK.TO-->
-    <meta name="referrer" content="no-referrer-when-downgrade">
-    <!--for TAWK.TO-->
+    <!-- Bootstrap CSS (for responsiveness) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <meta name="facebook-domain-verification" content="0avzzn3kts2h05ebudkx3eb2fde30o">
+    <!-- FontAwesome (for icons) -->
+    <link href="https://kit.fontawesome.com/a076d05399.css" rel="stylesheet">
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="ADU Business">
-    <meta name="keywords" content="ADU Business">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Custom Styles -->
+    <style>
+        /* Custom Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color:rgb(120, 241, 175);
+            
+        }
 
-    <meta name="msapplication-TileColor" content="#833ab4">
-    <meta name="msapplication-TileImage" content="{% static 'assets/img/favicon.php' %}">
-    <meta itemprop="name" content="ADU Business - Buy Airtime and Data for all Network. Make payment for DSTV, GOTV, PHCN other services">
-    <meta itemprop="description" content="Buy Cheap Internet Data Plan and Airtime Recharge for Airtel, 9mobile, GLO, MTN, Pay DSTV, GOTV, PHCN.">
-    <meta itemprop="image" content="{% static 'assets/img/favicon.php' %}">
-    <link rel="stylesheet" href="{% static 'css/TtijRQYM8nKS.css' %}">
+        .hero-section {
+            height: 100vh;
+            background: url("{% static 'images//girl-call.png' %}") no-repeat center center/cover;
+            color: rgb(10, 10, 50);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color:rgb(82, 4, 82);
+        }
 
-    <!-- Twitter Card data -->
-    <meta name="twitter:card" content="{% static 'assets/img/favicon.png' %}">
-    <meta name="twitter:title" content="ADU Business - Buy Airtime and Data for all Network. Make payment for DSTV, GOTV, PHCN other services">
-    <meta name="twitter:description" content="Buy Cheap Internet Data Plan and Airtime Recharge for Airtel, 9mobile, GLO, MTN, Pay DSTV, GOTV, PHCN.">
-    <meta name="twitter:image:src" content="{% static 'assets/images/DSC_0820 (2).jpg' %}">
+        .hero-section h1 {
+            font-size: 3rem;
+        }
 
-    <!-- Open Graph data -->
-    <meta property="og:locale" content="en_US">
-    <meta property="og:title" content="ADU Business - Buy Airtime and Data for all Network. Make payment for DSTV, GOTV, PHCN other services">
-    <meta property="og:image" content="{% static 'images/DSC_0820%20%282%29.jpg' %}">
-    <meta property="og:description" content="Buy Cheap Internet Data Plan and Airtime Recharge for Airtel, 9mobile, GLO, MTN, Pay DSTV, GOTV, PHCN.">
-    <meta property="og:site_name" content="ADU Business">
-    <meta property="og:url" content="https://www.business.aduikirun.com.ng">
-    <meta property="og:type" content="website">
+        .navbar-nav a {
+            color: #28a745 !important;
+        }
 
-    <title>ADU Business | We offer instant recharge of airtime, databundle, cable TV subscriptions (DSTV, GOTV, & STARTTIMES) Electricity bill payments and many more.</title>
+        .features-icon {
+            font-size: 2rem;
+            color: #28a745;
+        }
 
-    <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'eciIWSEnXsBX.ico' %}">
+        .features-item {
+            padding: 1.5rem;
+            text-align: center;
+        }
 
-    <meta name="theme-color" content="#061061">
+        .footer a:hover {
+            color: #28a745;
+        }
 
-    <!-- Plugin CSS -->
-    <link href="{% static 'css/Gsq7b6gMmEva.css' %}" rel="stylesheet">
-    <link href="{% static 'css/9IHumZavncK9.css' %}" rel="stylesheet">
-    <link href="{% static 'css/fPBngpt0O4B9.css' %}" rel="stylesheet">
-    <link href="{% static 'css/GSYMFcM3aBmU.css' %}" rel="stylesheet">
-    <link href="{% static 'css/aPeygJokAb0U.css' %}" rel="stylesheet">
-    <link href="{% static 'css/kOq6kyELVo2y.css' %}" rel="stylesheet">
+        .footer .input-group .btn-success {
+            background-color: #28a745;
+            border-color: #28a745;
+        }
 
-    <link rel="stylesheet" href="{% static 'css/4p113Jtmjo8h.css' %}">
+        .footer .input-group .btn-success:hover {
+            background-color: #218838;
+            border-color: #1e7e34;
+        }
 
-    <!-- Theme CSS -->
-    <link href="{% static 'css/dtIiXdFr3AYV.css' %}" rel="stylesheet">
-    <link href="{% static 'css/ROkAXiUkkR5X.css' %}" rel="stylesheet" id="color_theme">
-    <!-- End -->
+        .footer p {
+            font-size: 0.9rem;
+            color: #bbb;
+        }
 
+        .footer .text-light {
+            text-decoration: none;
+        }
+
+        .footer .text-light:hover {
+            color: #28a745;
+        }
+
+        .footer h5 {
+            margin-bottom: 1rem;
+        }
+
+        .footer {
+            margin-top: 2rem;
+        }
+    </style>
 </head>
+<body>
 
-<!-- ========== Body Starts ========== -->
-<body data-spy="scroll" data-target="#navbar" data-offset="98">
 
-    <!-- Header -->
-    <header class="fixed-header">
-        <nav class="navbar header-nav navbar-expand-lg">
-            <div class="container">
-                <!-- Brand -->
-                <a class="navbar-brand" href="https://epins.com.ng/vtuportalcreator">
-                    <img src="{% static 'images/a0p4drwubW94.png' %}" height="50">
-                </a>
-
-                <!-- Mobile Toggle -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <!-- / -->
-
-                <!-- Top Menu -->
-                <div class="collapse navbar-collapse justify-content-end" id="navbar">
-                    <ul class="navbar-nav ml-auto align-items-center">
-                        <li><a class="nav-link" href="{% url 'home' %}">Home</a></li>
-                        <li><a class="nav-link" href="#about">About Us</a></li>
-                        <li><a class="nav-link" href="#services">Services</a></li>
-                        <li><a class="nav-link" href="{% url 'register' %}">Register</a></li>
-                        <li><a class="nav-link-btn btn btn-white m-15px-l md-m-0px-l" href="{% url 'login' %}">Log In</a></li>
-                    </ul>
-                </div>
-                <!-- / -->
-
-            </div><!-- Container -->
-        </nav> <!-- Navbar -->
-    </header>
-    <!-- Header End -->
-
-    <!-- Main -->
-    <main>
-        <!-- ===================== Home Banner  ===================== -->
-        <section id="home" class="home-banner-02 theme-bg" style="background: #c3d0ff !important;">
-            <div class="home-efftect">
-                <img src="{% static 'fonts/SVaFfvyHoWiV.svg' %}">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">VTU Platform</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                </ul>
             </div>
-            <div class="container container-larage">
-                <div class="row justify-content-center align-items-center full-screen p-80px-tb">
-                    <div class="col-lg-5 order-2 order-lg-1">
-                        <div class="banner-text p-50px-t md-p-80px-t sm-p-40px-t">
-                            <h2 class="font-alt dark-color">Welcome to <br>ADU Business</h2>
-                            <p>A one-stop shop for instant recharge of Airtime, Data, TV & Electricity bill payments, WAEC & NECO PIN, Airtime 2 Cash Conversion, and many more.</p>
-                            <div class="btn-bar">
-                                <a class="btn btn-theme mr-2" href="{% url 'register' %}">Register <i class="fa fa-plus"></i> </a>
-                                <a class="btn btn-theme" href="{% url 'login' %}">Log In <i class="fa fa-unlock"></i> </a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-7 p-50px-t order-1 order-lg-2">
-                        <img src="{% static 'images/datagirl.png' %}">
-                    </div>
-                </div> <!-- row -->
-            </div>
-        </section>
-
-   <!-- ===================== About Us ===================== -->
-<section id="about" class="section border-bottom gray-bg-g shapes-section">
-    <div class="container">
-        <div class="row justify-content-center m-45px-b md-m-25px-b">
-            <div class="col-md-10 col-lg-8 col-xl-7">
-                <div class="section-title text-center">
-                    <h2 class="dark-color font-alt">Why Choose Us</h2>
-                    <p>ADU Business helps you make payments for services you enjoy right from the comfort of your home or office. The experience of total convenience, fast service delivery, and easy payment is just at your fingertips.</p>
-                </div>
-            </div> <!-- col -->
         </div>
+    </nav>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <h1>Instant Recharge, Data Plans & Bill Payments Made Easy</h1>
+            <a href="#get-started" class="btn btn-success btn-lg">Get Started</a>
+        </div>
+    </section>
 
+    <!-- Key Features Section -->
+    <section id="features" class="container py-5">
+        <h2 class="text-center mb-4">Our Key Features</h2>
         <div class="row">
-            <div class="col-md-4 m-15px-tb">
-                <div class="feature-box theme-hover box-shadow">
-                    <div class="icon">
-                        <img src="{% static 'images/a0p4drwubW94.png' %}" height="50">
-                    </div>
-                    <div class="feature-content">
-                        <h4 class="dark-color font-alt">Fully Automated System</h4>
-                        <p>Our data delivery and wallet funding is automated, airtime top-up and data purchase are automated and get delivered to you almost instantly.</p>
-                    </div>
-                </div>
-            </div> <!-- col -->
-
-            <div class="col-md-4 m-15px-tb">
-                <div class="feature-box theme-hover box-shadow">
-                    <div class="icon">
-                        <img src="{% static 'images/XwEqNjujqjCK.png' %}" height="50">
-                    </div>
-                    <div class="feature-content">
-                        <h4 class="dark-color font-alt">Cheap and Reliable</h4>
-                        <p>Our platform is a fully optimized platform for reliability and dependability. You get 100% value for any transaction with us.</p>
-                    </div>
-                </div>
-            </div> <!-- col -->
-
-            <div class="col-md-4 m-15px-tb">
-                <div class="feature-box theme-hover box-shadow">
-                    <div class="icon">
-                        <img src="{% static 'images/9oIdkTyMtT9x.png' %}" height="50">
-                    </div>
-                    <div class="feature-content">
-                        <h4 class="dark-color font-alt">24/7 Support</h4>
-                        <p>Our customer service is just a click away. Don’t hesitate to contact us on anything as our system is fully automated.</p>
-                    </div>
-                </div>
-            </div> <!-- col -->
-        </div> <!-- row -->
-
-    </div>
-
-    <div class="shapes-box">
-        <span data-parallax='{"x": 150, "y": -20, "rotateZ":500}'>
-            <img src="{% static 'images/Lt5oXv9ACC9A.png' %}">
-        </span>
-        <span data-parallax='{"x": 250, "y": 150, "rotateZ":500}'>
-            <img src="{% static 'images/VEw0hDOQh367.png' %}">
-        </span>
-        <span data-parallax='{"x": -180, "y": 80, "rotateY":2000}'>
-            <img src="{% static 'images/nBtBMRBCGnWL.png' %}">
-        </span>
-        <span data-parallax='{"x": -20, "y": 180}'>
-            <img src="{% static 'images/WwXHL25vpeDX.png' %}">
-        </span>
-        <span data-parallax='{"x": 300, "y": 70}'>
-            <img src="{% static 'images/BOXWxpV9byeY.png' %}">
-        </span>
-        <span data-parallax='{"x": 250, "y": 180, "rotateZ":1500}'>
-            <img src="{% static 'images/G5McVk4iZ4Ez.png' %}">
-        </span>
-        <span data-parallax='{"x": 180, "y": 10, "rotateZ":2000}'>
-            <img src="{% static 'images/0fAX9UfaYFtF.png' %}">
-        </span>
-        <span data-parallax='{"x": 60, "y": -100}'>
-            <img src="{% static 'images/yJeJmtfVWp6O.png' %}">
-        </span>
-        <span data-parallax='{"x": -30, "y": 150, "rotateZ":1500}'>
-            <img src="{% static 'images/hL9U3DFWI1CB.png' %}">
-        </span>
-    </div>
-</section>
-
-<!-- ===================== Feature ===================== -->
-<section id="about" class="section gray-bg border-bottom">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6 order-2 order-lg-1">
-                <div class="side-title p-50px-r md-p-0px-r">
-                    <h2 class="dark-color sub-title m-0px m-20px-b">ABOUT US</h2>
-                    <div class="large-text">
-                        <p>ADU Business helps you make payments for services you enjoy right from the comfort of your home or office. The experience of total convenience, fast service delivery, and easy payment is just at your fingertips. We are playing a major role in the distribution and sales of affordable and cheapest data, airtime, Dstv subscription, Gotv subscription, Startimes subscription, and Electricity subscription.</p>
-                    </div>
-                </div>
-            </div> <!-- col -->
-
-            <div class="col-md-6 text-center order-1 mb-4 order-lg-2 sm-m-30px-t">
-                <img src="{% static 'images/ZMSLTtmAEjvG.jpeg' %}" style="border-radius: 3%;">
-            </div> <!-- col -->
-        </div> <!-- row -->
-    </div>
-</section>
-
-<section class="section gray-bg border-bottom">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-md-6 text-center sm-m-30px-b">
-                <img src="{% static 'images/SfGU7JnPNUiC.jpeg' %}">
-            </div> <!-- col -->
-
-            <div class="col-md-6">
-                <div class="side-title p-50px-l md-p-0px-l">
-                    <h2 class="dark-color sub-title m-0px m-20px-b">Why Choose VTU Portal Creator?</h2>
-                    <div class="large-text">
-                        <p>We are a telecommunications company and play a major role in supplying and distributing affordable and cheap data, airtime, DSTV, and electricity subscriptions. If you want to save money, this is where to come.
-
-                            <a href="{% url 'register' %}">REGISTER NOW</a></p>
-                    </div>
-                </div>
-            </div> <!-- col -->
-        </div> <!-- row -->
-    </div>
-</section>
-
-<!-- ===================== SERVICES ===================== -->
-<section id="services" class="section gray-bg border-bottom">
-    <div class="container">
-        <div class="row justify-content-center m-45px-b md-m-25px-b">
-            <div class="col-md-10 col-lg-8 col-xl-7">
-                <div class="section-title text-center">
-                    <h2 class="dark-color font-alt">OUR SERVICES</h2>
-                    <p>We offer instant recharge of Airtime, Data bundles, CableTV (DStv, GOtv & Startimes), Electricity Bill Payment, Airtime to cash, and many more.</p>
-                </div>
-            </div> <!-- col -->
+            <div class="col-md-4 features-item">
+                <i class="features-icon fas fa-sync-alt"></i>
+                <h4>Instant Transactions</h4>
+                <p>Enjoy lightning-fast recharge and bill payments with no delays.</p>
+            </div>
+            <div class="col-md-4 features-item">
+                <i class="features-icon fas fa-lock"></i>
+                <h4>Secure Payments</h4>
+                <p>Your payment details are fully encrypted and secure.</p>
+            </div>
+            <div class="col-md-4 features-item">
+                <i class="features-icon fas fa-dollar-sign"></i>
+                <h4>Affordable Rates</h4>
+                <p>Get the best rates for mobile data, airtime, and bills.</p>
+            </div>
         </div>
+    </section>
 
+    <!-- Services Section -->
+    <section id="services" class="container py-5">
+        <h2 class="text-center mb-4">Our Services</h2>
         <div class="row">
-            <div class="col-md-4 m-15px-tb">
-                <div class="blog-item card shadow bg-white">
-                    <div class="blog-img">
-                        <a> <img src="{% static 'images/FFIqtP2vgXjn.jpg' %}"> </a>
-                    </div>
-                    <div class="blog-content px-3 mb-3">
-                        <h4><a class="dark-color text-uppercase">Buy Data</a></h4>
-                        <p>Data is life. Don't run out of it. Top up your data instantly with a click.</p>
+            <div class="col-md-3">
+                <div class="service-item text-center">
+                    <h4>Buy Airtime</h4>
+                    <p>Instantly purchase airtime for any network.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="service-item text-center">
+                    <h4>Buy Data</h4>
+                    <p>Recharge your data plan for any mobile network.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="service-item text-center">
+                    <h4>Cable TV</h4>
+                    <p>Subscribe to your favorite TV channels.</p>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="service-item text-center">
+                    <h4>Electricity Bills</h4>
+                    <p>Pay your electricity bills easily online.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="container py-5">
+        <h2 class="text-center mb-4">What Our Users Are Saying</h2>
+        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <p>"This platform has made recharging and paying bills so easy. I love the seamless experience!"</p>
+                    <small>- John Doe</small>
+                </div>
+                <div class="carousel-item">
+                    <p>"The fastest recharge service I've used. I highly recommend it."</p>
+                    <small>- Jane Smith</small>
+                </div>
+                <div class="carousel-item">
+                    <p>"Affordable and reliable. No issues with payments at all."</p>
+                    <small>- Michael Lee</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Plans Section -->
+    <section id="pricing" class="container py-5">
+        <h2 class="text-center mb-4">Pricing Plans</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="pricing-plan">
+                    <h4>Basic Plan</h4>
+                    <p>$10/month</p>
+                    <p>Basic recharge options</p>
+                    <button class="btn btn-success">Get Started</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pricing-plan">
+                    <h4>Standard Plan</h4>
+                    <p>$20/month</p>
+                    <p>Recharge + Bill Payments</p>
+                    <button class="btn btn-success">Get Started</button>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="pricing-plan">
+                    <h4>Premium Plan</h4>
+                    <p>$30/month</p>
+                    <p>All services included</p>
+                    <button class="btn btn-success">Get Started</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="container py-5">
+        <h2 class="text-center mb-4">Frequently Asked Questions</h2>
+        <div class="accordion" id="faqAccordion">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        What is Virtual Top-Up (VTU)?
+                    </button>
+                </h2>
+                <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        Virtual Top-Up (VTU) refers to the process of recharging or purchasing airtime, data, utility bills, and other services via online platforms.
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-4 m-15px-tb">
-                <div class="blog-item card shadow bg-white">
-                    <div class="blog-img">
-                        <a> <img src="{% static 'images/0mKJzz4qNL7L.jpg' %}"> </a>
-                    </div>
-                    <div class="blog-content px-3 mb-3">
-                        <h4><a class="dark-color text-uppercase">Airtime Recharge</a></h4>
-                        <p>We make Airtime recharge easy and affordable anytime, anywhere.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 m-15px-tb">
-                <div class="blog-item card shadow bg-white">
-                    <div class="blog-img">
-                        <a> <img src="{% static 'images/U9pAxVIvXzNG.jpg' %}"> </a>
-                    </div>
-                    <div class="blog-content px-3 mb-3">
-                        <h4><a class="dark-color text-uppercase">Cable Subscription</a></h4>
-                        <p>Instant Activation of Cable subscription with a favorable discount.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 m-15px-tb">
-                <div class="blog-item card shadow bg-white">
-                    <div class="blog-img">
-                        <a> <img src="{% static 'images/1FDKTNF4v5VW.jpg' %}"> </a>
-                    </div>
-                    <div class="blog-content px-3 mb-3">
-                        <h4><a class="dark-color text-uppercase">Utility Bills</a></h4>
-                        <p>Enjoy huge discounts on Electricity Bill Payments.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 m-15px-tb">
-                <div class="blog-item card shadow bg-white">
-                    <div class="blog-img">
-                        <a> <img src="{% static 'images/zhNoU6VTZwNQ.png' %}"> </a>
-                    </div>
-                    <div class="blog-content px-3 mb-3">
-                        <h4><a class="dark-color text-uppercase">Bulk SMS</a></h4>
-                        <p>Keep your customers/audience updated for your business or events with our instant delivery Bulk SMS.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4 m-15px-tb">
-                <div class="blog-item card shadow bg-white">
-                    <div class="blog-img">
-                        <a> <img src="{% static 'images/sDQVzckTmqJg.png' %}"> </a>
-                    </div>
-                    <div class="blog-content px-3 mb-3">
-                        <h4><a class="dark-color text-uppercase">Airtime to Cash</a></h4>
-                        <p>Convert airtime to cash in minutes.</p>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingTwo">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        How can I make payments on the platform?
+                    </button>
+                </h2>
+                <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                    <div class="accordion-body">
+                        You can make payments using various methods including bank transfers, mobile wallets, or credit/debit cards.
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
- <!--   ===================== Faqs =====================   -->
+    <!-- Contact Section -->
+    <section id="contact" class="container py-5">
+        <h2 class="text-center mb-4">Contact Us</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <form id="contactForm" action="/submit-contact-form" method="POST">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Full Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email address">
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject" required placeholder="Enter the subject">
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="4" required placeholder="Enter your message"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-
-    </main>
-
-    <!-- Footer -->
-<footer class="footer footer-dark">
-    <section class="footer-section">
+    <!-- Footer Section -->
+    <footer class="bg-dark text-light py-4">
         <div class="container">
             <div class="row">
-
-                <div class="col-sm-6 col-lg-4 sm-m-15px-tb md-m-30px-b">
-                    <h4 class="font-alt">VTU Portal Creator</h4>
-                    <p class="footer-text">We offer instant recharge of Airtime, Databundle, CableTV (DStv, GOtv & Startimes), Electricity Bill Payment, and Airtime to cash.</p>
-                    <ul class="social-icons">
-                        <li><a class="facebook" href="https://www.facebook.com/"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a class="twitter" href="https://twitter.com/"><i class="fab fa-twitter"></i></a></li>
-                        <li><a class="google" href="https://t.me/"><i class="fab fa-telegram-plane"></i></a></li>
-                        <li><a class="linkedin" href="#"><i class="fab fa-instagram"></i></a></li>
+                <div class="col-md-4">
+                    <h5 class="text-success">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#home" class="text-light">Home</a></li>
+                        <li><a href="#pricing" class="text-light">Pricing</a></li>
+                        <li><a href="#faq" class="text-light">FAQ</a></li>
+                        <li><a href="#contact" class="text-light">Contact Us</a></li>
+                        <li><a href="/login" class="text-light">Login</a></li>
+                        <li><a href="/register" class="text-light">Register</a></li>
                     </ul>
-                </div> <!-- col -->
+                </div>
 
-                <div class="col-sm-6 col-lg-4 sm-m-15px-tb">
-                    <h4 class="font-alt">Quick links</h4>
-                    <ul class="fot-link">
-                        <li><a class="nav-link" href="#">Buy Data</a></li>
-                        <li><a class="nav-link" href="#">Buy Airtime</a></li>
-                        <li><a class="nav-link" href="#">Cable Subscription</a></li>
-                        <li><a class="nav-link" href="#">Bill Payment</a></li>
-                    </ul>
-                </div> <!-- col -->
+                <div class="col-md-4">
+                    <h5 class="text-success">Newsletter</h5>
+                    <p>Stay updated with the latest offers and updates. Subscribe to our newsletter.</p>
+                    <form id="newsletterForm" action="/submit-newsletter" method="POST">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Enter your email" name="email" required>
+                            <button class="btn btn-success" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
 
-                <div class="col-sm-6 col-lg-4 sm-m-15px-tb">
-                    <h4 class="font-alt">Address</h4>
-                    <div class="fot-address">
-                        <p><i class="ti-home "></i>071276</p>
-                        <p><i class="ti-mobile"></i>07061</p>
-                        <p><i class="ti-email"></i> info@aduikirun.com.ng</p>
+                <div class="col-md-4">
+                    <h5 class="text-success">Follow Us</h5>
+                    <div>
+                        <a href="https://facebook.com/yourcompany" class="text-light mx-2"><i class="fab fa-facebook-square"></i></a>
+                        <a href="https://twitter.com/yourcompany" class="text-light mx-2"><i class="fab fa-twitter"></i></a>
+                        <a href="https://linkedin.com/company/yourcompany" class="text-light mx-2"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://instagram.com/yourcompany" class="text-light mx-2"><i class="fab fa-instagram"></i></a>
                     </div>
-                </div> <!-- col -->
-
+                </div>
             </div>
+            <div class="row mt-4">
+                <div class="col-12 text-center">
+                    <p>&copy; 2025 Virtual Top-Up Platform. All Rights Reserved.</p>
+                    <p>Customer Support: <a href="mailto:support@vtuplatform.com" class="text-light">support@vtuplatform.com</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-            <div class="footer-copy">
-                <div class="row">
-                    <div class="col-12">
-                        <p>All Rights Reserved ADU Business, Copyright © 2023.</p>
-                    </div><!-- col -->
-                </div> <!-- row -->
-            </div> <!-- footer-copy -->
-
-        </div> <!-- container -->
-    </section>
-</footer>
-<!-- / -->
-
-<!-- Jquery and Plugin JS Files -->
-<script src="{% static 'js/IOwmqj5jHxwX.js' %}"></script>
-<script src="{% static 'js/usN68JLElbyi.js' %}"></script>
-<script src="{% static 'js/oqXbgXBBwnJT.js' %}"></script>
-<script src="{% static 'js/mK0Zvq7jFBsI.js' %}"></script>
-<script src="{% static 'js/4YY3Q2ZdT96F.js' %}"></script>
-<script src="{% static 'js/ajQdR6tFmt4L.js' %}"></script>
-<script src="{% static 'js/1Ne2pGLJ0vIv.js' %}"></script>
-<script src="{% static 'js/l2ZBz3vvTdrh.js' %}"></script>
-<script src="{% static 'js/dilRkOpeNoYE.js' %}"></script>
-<script src="{% static 'js/XTnfCCWWb5LD.js' %}"></script>
-
-<!-- WhatsApp Widget -->
-<script type="text/javascript">
-    (function() {
-        var options = {
-            whatsapp: "+2347043371735", // WhatsApp number
-            call_to_action: "Message us", // Call to action
-            position: "left", // Position may be 'right' or 'left'
-        };
-        var proto = document.location.protocol,
-            host = "whatshelp.io",
-            url = proto + "//static." + host;
-        var s = document.createElement('script');
-        s.type = 'text/javascript';
-        s.async = true;
-        s.src = url + '/widget-send-button/js/init.js';
-        s.onload = function() {
-            WhWidgetSendButton.init(host, proto, options);
-        };
-        var x = document.getElementsByTagName('script')[0];
-        x.parentNode.insertBefore(s, x);
-    })();
-</script>
-
-<script src="{% static 'js/whatsapp.js' %}"></script>
+    <!-- Bootstrap JS & Dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 </html>

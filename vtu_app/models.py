@@ -29,6 +29,7 @@ class Transactions(models.Model):
     ])
     date = models.DateTimeField(default=now)
     description = models.TextField(blank=True, null=True)
+    api_return_message = models.TextField(blank=True, null=True)
 
     class Meta:
         db_table = 'transactions'
