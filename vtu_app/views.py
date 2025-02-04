@@ -24,20 +24,25 @@ def home(request):
     return render(request, 'index.html')
 
 def register(request):
+    if request.user.is_authenticated:
+        return redirect('main_page')  # Redirect already logged-in users
+
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
-            user.set_password(form.cleaned_data['password'])  # Hash password
-
-            form.save()
+            user.set_password(form.cleaned_data['password'])  # Hash the password
+            user.save()  # Save the user object
             return redirect('login')
     else:
         form = RegistrationForm()
+        
     return render(request, 'register.html', {'form': form})
-
 # Login View
 def user_login(request):
+    if request.user.is_authenticated:
+        return redirect('main_page')
+
     if request.method == 'POST':
         form = LoginForm(data=request.POST)
         if form.is_valid():
@@ -51,6 +56,7 @@ def user_login(request):
                 return redirect('main_page')
     else:
         form = LoginForm()
+        
     return render(request, 'login.html', {'form': form})
 
 @login_required
