@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS apiconfigs (
 -- Insert data into `apiconfigs`
 INSERT INTO apiconfigs (aId, name, value)
 VALUES
-    (1, 'monifyCharges', '1.08'),
+    (1, 'data_api', '49697ettdrd55555ggdd76ss77477ddssg6'),
     (2, 'monifyApi', 'MK_PROD_FLX4P92EDF'),
     (3, 'monifySecrete', 'RQDUNGNX17WTDRYAK2SH2RKTLNR38Y5Y'),
     (13, 'mtnVtuKey', '49697ettdrd55555ggdd76ss77477ddssg6')
