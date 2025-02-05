@@ -101,8 +101,7 @@
         <div class="container ms-0">
             <div class="logo-container">
                 <div class="logo-text">
-                    <span style="color: #e91e63;">Meder</span>
-                    <span class="sub">Sub</span>
+                    <span style="color: #e91e63;">Meder</span><span class="sub">Sub</span>
                 </div>
                 <div class="slogan">
                     by Mederhoo Tech Limited
@@ -150,8 +149,22 @@
             <a href="/register" class="btn btn-success btn-lg me-3">Get Started</a>
             <a href="/login" class="btn btn-outline-secondary btn-lg">Already a Member? Log In</a>
         </div>
+        {% if messages %}
+    <div>
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}" style="color: red;">
+               <h2>{{message}} pleace use whatsapp for fast communication</h2>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}
+
     </div>
 </section>
+<a href="https://wa.me/2348034295030"
+   target="_blank" id="whatsapp-button">
+    <i class="fab fa-whatsapp fa-4x"></i>
+</a>
 
    <!-- Key Features Section -->
 <section id="features" class="container py-5">
@@ -477,6 +490,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <form id="contactForm" action="/submit-contact-form" method="POST">
+                {% csrf_token %}
                     <div class="mb-3">
                         <label for="name" class="form-label">Full Name</label>
                         <input type="text" class="form-control" id="name" name="name" required placeholder="Enter your full name">
@@ -518,7 +532,8 @@
                 <div class="col-md-4">
                     <h5 class="text-success">Newsletter</h5>
                     <p>Stay updated with the latest offers and updates. Subscribe to our newsletter.</p>
-                    <form id="newsletterForm" action="/submit-newsletter" method="POST">
+                    <form id="newsletterForm" action="/" method="POST">
+                    {% csrf_token %}
                         <div class="input-group">
                             <input type="email" class="form-control" placeholder="Enter your email" name="email" required>
                             <button class="btn btn-success" type="submit">Subscribe</button>
@@ -529,17 +544,17 @@
                 <div class="col-md-4">
                     <h5 class="text-success">Follow Us</h5>
                     <div>
-                        <a href="https://facebook.com/yourcompany" class="text-light mx-2"><i class="fab fa-facebook-square"></i></a>
-                        <a href="https://twitter.com/yourcompany" class="text-light mx-2"><i class="fab fa-twitter"></i></a>
-                        <a href="https://linkedin.com/company/yourcompany" class="text-light mx-2"><i class="fab fa-linkedin"></i></a>
-                        <a href="https://instagram.com/yourcompany" class="text-light mx-2"><i class="fab fa-instagram"></i></a>
+                        <a href="https://facebook.com/mederhoo" class="text-light mx-2"><i class="fab fa-facebook-square"></i></a>
+                        <a href="https://twitter.com/mederhoo" class="text-light mx-2"><i class="fab fa-twitter"></i></a>
+                        <a href="https://linkedin.com/in/mederhoo1" class="text-light mx-2"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://instagram.com/mederhoo" class="text-light mx-2"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
             </div>
             <div class="row mt-4">
                 <div class="col-12 text-center">
                     <p>&copy; 2025 Virtual Top-Up Platform. All Rights Reserved.</p>
-                    <p>Customer Support: <a href="mailto:support@vtuplatform.com" class="text-light">support@vtuplatform.com</a></p>
+                    <p>Customer Support: <a href="mailto:support@medersub.com" class="text-light">support@medersub.com</a></p>
                 </div>
             </div>
         </div>
