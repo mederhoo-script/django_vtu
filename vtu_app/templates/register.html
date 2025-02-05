@@ -117,14 +117,16 @@
             </div>
 
             <div class="row">
-                <!-- Pin -->
-                <div class="col-md-6 mb-3">
-                    <label for="pin" class="form-label">Transaction Pin <span class="text-danger">*</span></label>
-                    <input type="password" class="form-control" id="pin" name="pin" required>
-                    {% if form.pin.errors %}
-                        <small class="text-danger">{{ form.pin.errors }}</small>
-                    {% endif %}
-                </div>
+               <!-- Transaction Pin -->
+<div class="col-md-6 mb-3">
+    <label for="pin" class="form-label">Transaction Pin <span class="text-danger">*</span></label>
+    <input type="password" class="form-control" id="pin" name="pin" pattern="\d{4}" maxlength="4" placeholder="4-digit PIN" required>
+    <small class="form-text text-muted">PIN must be exactly 4 digits.</small>
+    {% if form.pin.errors %}
+        <small class="text-danger">{{ form.pin.errors }}</small>
+    {% endif %}
+</div>
+
 
                 <!-- Password -->
 <div class="col-md-6 mb-3">

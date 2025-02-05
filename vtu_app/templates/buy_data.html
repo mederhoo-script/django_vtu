@@ -266,6 +266,12 @@
                         <input name="transref" type="hidden" value="{{ transRef }}" />
                         <input name="transkey" id="transkey" type="hidden" />
 
+                        <div class="mb-3">
+    <label for="transaction_pin" class="form-label">Transaction PIN</label>
+    <input type="password" class="form-control" id="transaction_pin" name="transaction_pin" placeholder="Enter your 4-digit transaction PIN" minlength="4" maxlength="4" required>
+</div>
+
+
                         <button type="submit" class="btn btn-primary w-100">Buy Data</button>
                     </form>
                 </div>

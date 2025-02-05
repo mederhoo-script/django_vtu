@@ -117,11 +117,16 @@ def buy_airtime(request):
     if request.method == 'POST':
         network = request.POST.get('network')
         phone = request.POST.get('phone')
-        amount = Decimal(request.POST.get('amount'))
+        amount = request.POST.get('amount')
         bypass = request.POST.get('ported_number') == 'on'
+        pin = request.POST.get('transaction_pin')
         user = request.user
 
-        if user.balance >= amount:
+        if pin != user.pin:
+            messages.error(request, 'Invalid transaction PIN. Please try again.')
+            return redirect('buy_airtime')
+
+        if user.balance >= Decimal(amount):
 
 
             # Generate a unique transaction ID for tracking
@@ -150,17 +155,18 @@ def buy_airtime(request):
                 res = response.json()
                 print(f"bypass: {bypass}{res}")
 
-                if res.get('status') == 'fail':
+                if res.get('status') == 'success':
                     # Airtime purchase successful
                     # Deduct amount from user balance
-                    user.balance -= amount
+                    amount_to_pay = float(amount) - (float(amount) * 0.01)
+                    user.balance -= Decimal(amount_to_pay)
                     user.save()
                     # Create a transaction record
                     transaction = Transactions.objects.create(
                         user=user,
                         service_name='Airtime',
                         transaction_id=request_id,
-                        amount=amount,
+                        amount=Decimal(amount),
                         status='completed',
                         description=f"Airtime of {amount} for {phone} on {network} network.",
                         api_return_message=res
@@ -211,7 +217,13 @@ def buy_data(request):
         bypass = request.POST.get('ported_number') == 'on'
         amount_to_pay = request.POST.get('amounttopay')
         request_id = generate_transaction_id()
-        print(f"network is {network}, data_plan: {data_plan}, phone: {phone}, bypass: {bypass}, amount_to_pay: {amount_to_pay}, request_id is {request_id}")
+        pin = request.POST.get('transaction_pin')
+        user = request.user
+
+
+        if pin != user.pin:
+            messages.error(request, 'Invalid transaction PIN. Please try again.')
+            return redirect('buy_data')
 
         # Define the payload
         payload = {
@@ -237,7 +249,7 @@ def buy_data(request):
                 response = requests.post(url, json=payload, headers=headers)
 
                 res = response.json()
-                if res.get('status') == 'fail':
+                if res.get('status') == 'success':
                     print('from succes if', res)
                     user.balance -= Decimal(amount_to_pay)
                     user.save()
