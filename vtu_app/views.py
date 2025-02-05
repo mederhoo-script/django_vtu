@@ -89,6 +89,11 @@ def main_page(request):
     return render(request, 'main_page.html', context)
 
 @login_required
+def coming_soon(request):
+    messages.error(request, 'COMING SOON')
+    return redirect('main_page')
+
+@login_required
 def profile(request):
     user = request.user
     if request.method == 'POST':

@@ -118,6 +118,23 @@
                     </a>
                 </div>
             </div>
+
+            {% for message in messages %}
+                <div class="alert alert-dismissible fade show" role="alert" style="
+                padding: 15px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                color: white;
+                background-color: {% if message.tags == 'success' %} {{'green'}}
+                {% else %}
+               {{'red'}}
+               {% endif %}
+               ;
+            ">
+                   <h2> {{ message}} <h2/>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
         </div>
 
     
@@ -150,6 +167,7 @@
     
 <div class="section">
     <h3>Others</h3>
+    <a href="{% url 'coming_soon' %}">
     <div class="section-icons">
         <span><img src="{% static 'images/icons/dstv.png' %}" alt="DSTV" class="icon"></span>
         <span><img src="{% static 'images/icons/gotv.png' %}" alt="GOTV" class="icon"></span>
@@ -161,6 +179,7 @@
         <span><img src="{% static 'images/icons/waec.png' %}" alt="WAEC" class="icon"></span>
     
     </div>
+    </a>
 </div>
 
             <!-- Shortlinks Section -->
@@ -172,7 +191,7 @@
                         <i class="fa fa-phone fa-2x"></i>
                         <p>Buy Airtime</p>
                     </a>
-                    <a href="{% url 'buy_data_pin' %}" class="col-3">
+                    <a href="{% url 'coming_soon' %}" class="col-3">
                         <i class="fa fa-cloud fa-2x"></i>
 
                         <p>Data Card</p>
@@ -202,39 +221,39 @@
                         <i class="fa fa-wifi fa-2x"></i>
                         <p>Data</p>
                     </a>
-                    <a href="{% url 'cable_tv' %}" class="col-4">
+                    <a href="{% url 'coming_soon' %}" class="col-4">
                         <i class="fa fa-tv fa-2x"></i>
                         <p>Cable TV</p>
                     </a>
-                    <a href="{% url 'electricity' %}" class="col-4">
+                    <a href="{% url 'coming_soon' %}" class="col-4">
                         <i class="fa fa-bolt fa-2x"></i>
                         <p>Electricity</p>
                     </a>
-                    <a href="{% url 'exam_pins' %}" class="col-4">
+                    <a href="{% url 'coming_soon' %}" class="col-4">
                         <i class="fa fa-graduation-cap fa-2x"></i>
                         <p>Exam Pins</p>
                     </a>
-                    <a href="{% url 'airtime2cash' %}" class="col-4">
+                    <a href="{% url 'coming_soon' %}" class="col-4">
                         <i class="fa fa-phone fa-2x"></i>
                         <p>Airtime 2 Cash</p>
                     </a>
-                    <a href="{% url 'recharge_pin' %}" class="col-4">
+                    <a href="{% url 'coming_soon' %}" class="col-4">
                         <i class="fa fa-receipt fa-2x"></i>
                         <p>Recharge Pin</p>
                     </a>
-                    <a href="{% url 'buy_data_pin' %}" class="col-4">
+                    <a href="{% url 'coming_soon' %}" class="col-4">
                         <i class="fa fa-wifi fa-2x"></i>
                         <p>Data Card</p>
                     </a>
-                    <a href="{% url 'w2bank' %}" class="col-4">
+                    <a href="{% url 'coming_soon' %}" class="col-4">
                         <i class="fa fa-arrow-up fa-2x"></i>
                         <p>Wallet 2 Bank</p>
                     </a>
-                    <a href="{% url 'transactions' %}" class="col-4">
+                    <a href="{% url 'coming_soon' %}" class="col-4">
                         <i class="fa fa-receipt fa-2x"></i>
                         <p>Transactions</p>
                     </a>
-                    <a href="{% url 'pricing' %}" class="col-4">
+                    <a href="{% url 'coming_soon' %}" class="col-4">
                         <i class="fa fa-list fa-2x"></i>
                         <p>Pricing</p>
                     </a>
