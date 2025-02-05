@@ -224,6 +224,7 @@ def buy_data(request):
         request_id = generate_transaction_id()
         pin = request.POST.get('transaction_pin')
         user = request.user
+        print(f"network is {network}, data_plan: {data_plan}, phone: {phone}, bypass: {bypass}, amount_to_pay: {amount_to_pay}, request_id is {request_id}")
 
 
         if pin != user.pin:
