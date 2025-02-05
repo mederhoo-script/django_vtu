@@ -21,6 +21,8 @@ def generate_transaction_id():
     return transaction_id
 
 def home(request):
+    if request.user.is_authenticated:
+        return redirect('main_page')
     return render(request, 'index.html')
 
 def register(request):
@@ -56,8 +58,26 @@ def user_login(request):
                 return redirect('main_page')
     else:
         form = LoginForm()
-        
+
     return render(request, 'login.html', {'form': form})
+
+def contact_view(request):
+    if request.method == 'POST':
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+
+        full_message = f"From: {name} <{email}>\n\n{message}"
+        try:
+            send_mail(subject, full_message, 'mederhoo@gmail.com', ['mederhoo@yahoo.com'])
+            messages.success(request, 'Your message was successfully sent!')
+        except Exception as e:
+            messages.error(request, f"Failed to send message: {e}")
+
+        return redirect('home')
+
+    return redirect('home')
 
 @login_required
 def main_page(request):

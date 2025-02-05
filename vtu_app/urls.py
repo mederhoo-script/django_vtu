@@ -22,6 +22,7 @@ urlpatterns = [
     path('w2bank', views.w2bank, name='w2bank'),
     path('transactions', views.transactions, name='transactions'),
     path('pricing', views.pricing, name='pricing'),
+    path('submit-contact-form', views.contact_view, name='contact_page'),
 
     # path('add-agent/', views.add_agent, name='add_agent'),
 ]

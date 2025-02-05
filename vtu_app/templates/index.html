@@ -9,12 +9,16 @@
     <title>MEDERSUB</title>
 
     <!-- Bootstrap CSS (for responsiveness) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 
     <!-- FontAwesome (for icons) -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+
     <link href="https://kit.fontawesome.com/a076d05399.css" rel="stylesheet">
 
     <!-- Custom Styles -->
+    <link rel="stylesheet" href="{% static 'css/logo.css' %}">
     <style>
         /* Custom Styles */
         body {
@@ -25,7 +29,7 @@
 
         .hero-section {
             height: 100vh;
-            background: url("{% static 'images//girl-call.png' %}") no-repeat center center/cover;
+            background: url("{% static 'images/girl-call.png' %}") no-repeat center center/cover;
             color: rgb(10, 10, 50);
             display: flex;
             justify-content: center;
@@ -86,6 +90,7 @@
         .footer {
             margin-top: 2rem;
         }
+        
     </style>
 </head>
 <body>
@@ -93,8 +98,16 @@
 
     <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="#">VTU Platform</a>
+        <div class="container ms-0">
+            <div class="logo-container">
+                <div class="logo-text">
+                    <span style="color: #e91e63;">Meder</span>
+                    <span class="sub">Sub</span>
+                </div>
+                <div class="slogan">
+                    by Mederhoo Tech Limited
+                </div>
+            </div>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -111,117 +124,321 @@
         </div>
     </nav>
     <!-- Hero Section -->
-    <section class="hero-section">
-        <div class="container">
-            <h1>Instant Recharge, Data Plans & Bill Payments Made Easy</h1>
-            <a href="#get-started" class="btn btn-success btn-lg">Get Started</a>
-        </div>
-    </section>
+<section class="hero-section bg-light py-5">
+    <div class="container text-center">
+        <!-- Navigation Section -->
+        <nav class="mb-4">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/login">Member Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark" href="/register">Join Us: Register</a>
+                </li>
+            </ul>
+        </nav>
 
-    <!-- Key Features Section -->
-    <section id="features" class="container py-5">
-        <h2 class="text-center mb-4">Our Key Features</h2>
-        <div class="row">
-            <div class="col-md-4 features-item">
-                <i class="features-icon fas fa-sync-alt"></i>
-                <h4>Instant Transactions</h4>
-                <p>Enjoy lightning-fast recharge and bill payments with no delays.</p>
-            </div>
-            <div class="col-md-4 features-item">
-                <i class="features-icon fas fa-lock"></i>
-                <h4>Secure Payments</h4>
-                <p>Your payment details are fully encrypted and secure.</p>
-            </div>
-            <div class="col-md-4 features-item">
-                <i class="features-icon fas fa-dollar-sign"></i>
-                <h4>Affordable Rates</h4>
-                <p>Get the best rates for mobile data, airtime, and bills.</p>
-            </div>
-        </div>
-    </section>
+        <!-- Hero Content -->
+        <h1 class="display-4 fw-bold text-primary">
+            Instant Recharge, Data Plans & Bill Payments Made Easy
+        </h1>
+        <p class="lead text-danger">
+            Seamlessly top up airtime, purchase affordable data plans, and settle utility bills — all in one place.
+        </p>
 
-    <!-- Services Section -->
-    <section id="services" class="container py-5">
-        <h2 class="text-center mb-4">Our Services</h2>
-        <div class="row">
-            <div class="col-md-3">
-                <div class="service-item text-center">
-                    <h4>Buy Airtime</h4>
-                    <p>Instantly purchase airtime for any network.</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="service-item text-center">
-                    <h4>Buy Data</h4>
-                    <p>Recharge your data plan for any mobile network.</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="service-item text-center">
-                    <h4>Cable TV</h4>
-                    <p>Subscribe to your favorite TV channels.</p>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="service-item text-center">
-                    <h4>Electricity Bills</h4>
-                    <p>Pay your electricity bills easily online.</p>
+        <div class="mt-4">
+            <a href="/register" class="btn btn-success btn-lg me-3">Get Started</a>
+            <a href="/login" class="btn btn-outline-secondary btn-lg">Already a Member? Log In</a>
+        </div>
+    </div>
+</section>
+
+   <!-- Key Features Section -->
+<section id="features" class="container py-5">
+    <h2 class="text-center mb-5 fw-bold text-dark">Our Key Features</h2>
+    <div class="row g-4">
+        <!-- Feature Card 1 -->
+        <div class="col-md-4">
+            <div class="card text-center border-0 shadow-sm p-4 h-100">
+                <div class="card-body">
+                    <i class="fas fa-sync-alt fa-3x text-primary mb-3"></i>
+                    <h4 class="card-title fw-bold">Instant Transactions</h4>
+                    <p class="card-text text-muted">Enjoy lightning-fast recharge and bill payments with no delays.</p>
                 </div>
             </div>
         </div>
-    </section>
+
+        <!-- Feature Card 2 -->
+        <div class="col-md-4">
+            <div class="card text-center border-0 shadow-sm p-4 h-100">
+                <div class="card-body">
+                    <i class="fas fa-lock fa-3x text-success mb-3"></i>
+                    <h4 class="card-title fw-bold">Secure Payments</h4>
+                    <p class="card-text text-muted">Your payment details are fully encrypted and secure.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature Card 3 -->
+        <div class="col-md-4">
+            <div class="card text-center border-0 shadow-sm p-4 h-100">
+                <div class="card-body">
+                    <i class="fas fa-dollar-sign fa-3x text-warning mb-3"></i>
+                    <h4 class="card-title fw-bold">Affordable Rates</h4>
+                    <p class="card-text text-muted">Get the best rates for mobile data, airtime, and bills.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+   <!-- Services Section -->
+<section id="services" class="container py-5">
+    <h2 class="text-center mb-5 fw-bold text-dark">Our Services</h2>
+
+    <!-- Big Intro Card for Programming & Web Design -->
+<div class="card bg-primary text-white mb-5 shadow-lg p-4">
+    <div class="row align-items-center">
+        <div class="col-md-8">
+            <h3 class="fw-bold">Expert Programming & Web Design Services</h3>
+            <p class="fs-5">We craft modern, user-friendly websites and custom software solutions tailored to your business needs. From design to deployment, we deliver top-notch results to help you stand out in the digital world.</p>
+
+            <!-- Hire Developer with WhatsApp Link -->
+            <a href="https://wa.me/2348034295030?text=Hello%2C%20I'm%20interested%20in%20your%20Programming%20and%20Web%20Design%20Services.%20Please%20provide%20more%20details."
+               target="_blank" class="btn btn-success mt-3">
+                <i class="fab fa-whatsapp"></i> Hire Developer
+            </a>
+        </div>
+        <div class="col-md-4 text-center">
+            <i class="fas fa-laptop-code fa-5x"></i>
+        </div>
+    </div>
+</div>
+
+    <div class="row g-4">
+        <!-- Service Card 1 -->
+        <div class="col-md-3">
+            <div class="card text-center border-0 shadow-sm p-4 h-100 service-card">
+                <div class="card-body">
+                    <i class="fas fa-mobile-alt fa-3x text-primary mb-3"></i>
+                    <h4 class="card-title fw-bold text-primary">Buy Airtime</h4>
+                    <p class="card-text text-muted">Instantly purchase airtime for any network.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Card 2 -->
+        <div class="col-md-3">
+            <div class="card text-center border-0 shadow-sm p-4 h-100 service-card">
+                <div class="card-body">
+                    <i class="fas fa-wifi fa-3x text-success mb-3"></i>
+                    <h4 class="card-title fw-bold text-success">Buy Data</h4>
+                    <p class="card-text text-muted">Recharge your data plan for any mobile network.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Card 3 -->
+        <div class="col-md-3">
+            <div class="card text-center border-0 shadow-sm p-4 h-100 service-card">
+                <div class="card-body">
+                    <i class="fas fa-tv fa-3x text-warning mb-3"></i>
+                    <h4 class="card-title fw-bold text-warning">Cable TV</h4>
+                    <p class="card-text text-muted">Subscribe to your favorite TV channels.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Card 4 -->
+        <div class="col-md-3">
+            <div class="card text-center border-0 shadow-sm p-4 h-100 service-card">
+                <div class="card-body">
+                    <i class="fas fa-bolt fa-3x text-danger mb-3"></i>
+                    <h4 class="card-title fw-bold text-danger">Electricity Bills</h4>
+                    <p class="card-text text-muted">Pay your electricity bills easily online.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FontAwesome for Icons -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 
     <!-- Testimonials Section -->
-    <section id="testimonials" class="container py-5">
-        <h2 class="text-center mb-4">What Our Users Are Saying</h2>
-        <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <p>"This platform has made recharging and paying bills so easy. I love the seamless experience!"</p>
-                    <small>- John Doe</small>
-                </div>
-                <div class="carousel-item">
-                    <p>"The fastest recharge service I've used. I highly recommend it."</p>
-                    <small>- Jane Smith</small>
-                </div>
-                <div class="carousel-item">
-                    <p>"Affordable and reliable. No issues with payments at all."</p>
-                    <small>- Michael Lee</small>
-                </div>
-            </div>
+<section id="testimonials" class="container py-5">
+    <h2 class="text-center mb-5 fw-bold text-dark">What Our Users Are Saying</h2>
+    <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+        <!-- Carousel Indicators -->
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#testimonialCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-    </section>
 
-    <!-- Pricing Plans Section -->
-    <section id="pricing" class="container py-5">
-        <h2 class="text-center mb-4">Pricing Plans</h2>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="pricing-plan">
-                    <h4>Basic Plan</h4>
-                    <p>$10/month</p>
-                    <p>Basic recharge options</p>
-                    <button class="btn btn-success">Get Started</button>
-                </div>
+        <div class="carousel-inner shadow-lg rounded">
+            <!-- Testimonial 1 -->
+            <div class="carousel-item active text-center py-5">
+                <p class="fs-5 text-muted fst-italic">"This platform has made recharging and paying bills so easy. I love the seamless experience!"</p>
+                <small class="fw-bold text-primary">- John Doe</small>
             </div>
-            <div class="col-md-4">
-                <div class="pricing-plan">
-                    <h4>Standard Plan</h4>
-                    <p>$20/month</p>
-                    <p>Recharge + Bill Payments</p>
-                    <button class="btn btn-success">Get Started</button>
-                </div>
+
+            <!-- Testimonial 2 -->
+            <div class="carousel-item text-center py-5">
+                <p class="fs-5 text-muted fst-italic">"The fastest recharge service I've used. I highly recommend it."</p>
+                <small class="fw-bold text-success">- Jane Smith</small>
             </div>
-            <div class="col-md-4">
-                <div class="pricing-plan">
-                    <h4>Premium Plan</h4>
-                    <p>$30/month</p>
-                    <p>All services included</p>
-                    <button class="btn btn-success">Get Started</button>
-                </div>
+
+            <!-- Testimonial 3 -->
+            <div class="carousel-item text-center py-5">
+                <p class="fs-5 text-muted fst-italic">"Affordable and reliable. No issues with payments at all."</p>
+                <small class="fw-bold text-warning">- Michael Lee</small>
             </div>
         </div>
-    </section>
+
+        <!-- Carousel Controls -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>
+
+
+   <!-- Pricing Section -->
+<section id="pricing" class="container py-5">
+    <h2 class="text-center mb-5 fw-bold text-dark">Our Pricing Plans</h2>
+    <div class="row g-4">
+        <!-- MTN Pricing Card -->
+        <div class="col-md-3">
+            <div class="card text-center border-0 shadow-lg p-4 pricing-card">
+                <div class="d-flex justify-content-center mb-3">
+                <img src="{% static 'images/mtn.png' %}" alt="MTN Logo" class="card-logo mb-3" />
+                </div>
+                <h4 class="card-title fw-bold text-warning">MTN Data</h4>
+                <ul class="list-group mb-4">
+            <li class="list-group-item d-flex justify-content-between">
+                <span>500MB</span><span> </span><span>₦145</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>1GB</span><span> </span><span>₦290</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>2GB</span><span> </span><span>₦580</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>3GB</span><span> </span><span>₦870</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>5GB</span><span> </span><span>₦1450</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>10GB</span><span> </span><span>₦2900</span>
+            </li>
+        </ul>
+                <a href="#" class="btn btn-warning w-100">Buy MTN Data</a>
+            </div>
+        </div>
+
+        <!-- Airtel Pricing Card -->
+        <div class="col-md-3">
+            <div class="card text-center border-0 shadow-lg p-4 pricing-card">
+                <div class="d-flex justify-content-center mb-3">
+                <img src="{% static 'images/airtel.png' %}" alt="Airtel Logo" class="card-logo mb-3" />
+                </div>
+                <h4 class="card-title fw-bold text-danger">Airtel Data</h4>
+                 <ul class="list-group mb-4">
+            <li class="list-group-item d-flex justify-content-between">
+                <span>500MB</span><span> </span><span>₦145</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>1GB</span><span> </span><span>₦290</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>2GB</span><span> </span><span>₦580</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>3GB</span><span> </span><span>₦870</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>5GB</span><span> </span><span>₦1450</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>10GB</span><span> </span><span>₦2900</span>
+            </li>
+        </ul>
+                <a href="#" class="btn btn-danger w-100">Buy Airtel Data</a>
+            </div>
+        </div>
+
+        <!-- Glo Pricing Card -->
+        <div class="col-md-3">
+            <div class="card text-center border-0 shadow-lg p-4 pricing-card">
+                <div class="d-flex justify-content-center mb-3">
+                <img src="{% static 'images/glo.png' %}" alt="Glo Logo" class="card-logo mb-3" />
+                </div>
+                <h4 class="card-title fw-bold text-success">Glo Data</h4>
+                <ul class="list-group mb-4">
+            <li class="list-group-item d-flex justify-content-between">
+                <span>500MB</span><span> </span><span>₦145</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>1GB</span><span> </span><span>₦290</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>2GB</span><span> </span><span>₦580</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>3GB</span><span> </span><span>₦870</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>5GB</span><span> </span><span>₦1450</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>10GB</span><span> </span><span>₦2900</span>
+            </li>
+        </ul>
+                <a href="#" class="btn btn-success w-100">Buy Glo Data</a>
+            </div>
+        </div>
+
+        <!-- 9mobile Pricing Card -->
+        <div class="col-md-3">
+            <div class="card text-center border-0 shadow-lg p-4 pricing-card">
+                <div class="d-flex justify-content-center mb-3">
+                <img src="{% static 'images/9mobile.png' %}" alt="9mobile Logo" class="card-logo mb-3" />
+                </div>
+                <h4 class="card-title fw-bold text-primary">9mobile Data</h4>
+                <ul class="list-group mb-4">
+            <li class="list-group-item d-flex justify-content-between">
+                <span>500MB</span><span> </span><span>₦145</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>1GB</span><span> </span><span>₦290</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>2GB</span><span> </span><span>₦580</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>3GB</span><span> </span><span>₦870</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>5GB</span><span> </span><span>₦1450</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+                <span>10GB</span><span> </span><span>₦2900</span>
+            </li>
+        </ul>
+                <a href="#" class="btn btn-primary w-100">Buy 9mobile Data</a>
+            </div>
+        </div>
+</section>
 
     <!-- FAQ Section -->
     <section id="faq" class="container py-5">
@@ -329,7 +546,6 @@
     </footer>
 
     <!-- Bootstrap JS & Dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>

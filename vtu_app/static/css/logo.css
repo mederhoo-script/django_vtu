@@ -1,0 +1,126 @@
+<style>
+        .logo-container {
+            font-family: 'Arial', sans-serif;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e91e63; /* Pink for "Meder" */
+        }
+
+        .logo-text .sub {
+            color: #3498db; /* Different color for "Sub" */
+        }
+
+        .slogan {
+            font-size: 12px;
+            color: #b300ff;
+            margin-top: -5px;
+        }
+         /* Card hover effect */
+    .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+    }
+
+    /* Animated card icons */
+    .service-card i {
+        transition: transform 0.3s ease;
+    }
+
+    .service-card:hover i {
+        transform: rotate(10deg) scale(1.2);
+    }
+
+    /* Colorful Titles */
+    h4.card-title {
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    #testimonials {
+        background: #f9f9f9;
+        border-radius: 15px;
+    }
+
+    .carousel-inner {
+        background: #fff;
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    .carousel-item p {
+        font-size: 1.2rem;
+    }
+
+    /* Carousel navigation icons */
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: #333;
+        border-radius: 50%;
+    }
+
+    /* Hover effect for carousel indicators */
+    .carousel-indicators button {
+        background-color: #007bff;
+        opacity: 0.5;
+    }
+
+    .carousel-indicators .active {
+        background-color: #007bff;
+        opacity: 1;
+    }
+
+     .btn-success {
+        background-color: #25d366;
+        border: none;
+        color: white;
+        font-size: 1rem;
+        padding: 10px 20px;
+        border-radius: 50px;
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    .btn-success i {
+        margin-right: 8px;
+        font-size: 1.3rem;
+    }
+
+    .btn-success:hover {
+        background-color: #1ebe57;
+    }
+
+    .pricing-card {
+        border-radius: 15px;
+        background-color: #f8f9fa;
+        width: 200px;
+    }
+
+    .card-logo {
+        width: 60px;
+        height: 60px;
+    }
+
+    .list-group-item {
+        display: flex;
+        justify-content: space-between;
+        font-weight: 500;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 10px 0;
+        border-radius: 30px;
+    }
+
+    .btn:hover {
+        opacity: 0.9;
+        }
+
+    </style>
+
