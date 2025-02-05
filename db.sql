@@ -129,7 +129,7 @@ VALUES
 (49, '2GB', '320', '320', '320', '320', '91', 'GIFTING', 3, '1'),
 (50, '3.5GB', '500', '500', '500', '500', '92', 'GIFTING', 3, '2'),
 -- GLO GIFTING Plan
-(51, '15GB', '2000', '2000', '2000', '2000', '93', 'GIFTING', 3, '7'),
+(51, '15GB', '2000', '2000', '2000', '2000', '93', 'GIFTING', 3, '7')
     ON CONFLICT(pId) DO NOTHING;
 
 -- Create `networkid` table
