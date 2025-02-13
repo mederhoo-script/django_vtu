@@ -65,7 +65,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
         <div class="container">
-            <a class="navbar-brand" href="#">MyApp</a>
+            <a class="navbar-brand" href="#">{{user.username}}</a>
             <a class="nav-link navbar-balance" style="background-color: {% if user.balance < 199 %}red{% else %}#4CAF50{% endif %};">
                 <i class="fas fa-balance-scale"></i> Balance: &#8358;{{ user.balance }}
             </a>

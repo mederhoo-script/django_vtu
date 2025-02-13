@@ -1,26 +1,26 @@
--- Create `airtime` table
-CREATE TABLE IF NOT EXISTS airtime (
-    aId INTEGER PRIMARY KEY,
-    aNetwork VARCHAR(10) NOT NULL,
-    aBuyDiscount REAL NOT NULL,
-    aUserDiscount REAL NOT NULL,
-    aAgentDiscount REAL NOT NULL,
-    aVendorDiscount REAL NOT NULL,
-    aType VARCHAR(50) NOT NULL
-);
-
--- Insert data into `airtime`
-INSERT INTO airtime (aId, aNetwork, aBuyDiscount, aUserDiscount, aAgentDiscount, aVendorDiscount, aType)
-VALUES
-    (1, '1', 98, 99.5, 99.2, 99, 'VTU'),
-    (2, '2', 95.5, 99, 98, 97.5, 'VTU'),
-    (3, '3', 96.5, 98.5, 98, 97.8, 'VTU'),
-    (4, '4', 98, 99.5, 99.2, 99, 'VTU'),
-    (5, '1', 98, 99.6, 99.2, 99, 'Share And Sell'),
-    (6, '2', 93.5, 98, 97.2, 96.5, 'Share And Sell'),
-    (7, '3', 87, 94, 93, 92, 'Share And Sell'),
-    (8, '4', 88, 85, 94, 92, 'Share And Sell')
-    ON CONFLICT(aId) DO NOTHING;
+-- -- Create `airtime` table
+-- CREATE TABLE IF NOT EXISTS airtime (
+--     aId INTEGER PRIMARY KEY,
+--     aNetwork VARCHAR(10) NOT NULL,
+--     aBuyDiscount REAL NOT NULL,
+--     aUserDiscount REAL NOT NULL,
+--     aAgentDiscount REAL NOT NULL,
+--     aVendorDiscount REAL NOT NULL,
+--     aType VARCHAR(50) NOT NULL
+-- );
+--
+-- -- Insert data into `airtime`
+-- INSERT INTO airtime (aId, aNetwork, aBuyDiscount, aUserDiscount, aAgentDiscount, aVendorDiscount, aType)
+-- VALUES
+--     (1, '1', 98, 99.5, 99.2, 99, 'VTU'),
+--     (2, '2', 95.5, 99, 98, 97.5, 'VTU'),
+--     (3, '3', 96.5, 98.5, 98, 97.8, 'VTU'),
+--     (4, '4', 98, 99.5, 99.2, 99, 'VTU'),
+--     (5, '1', 98, 99.6, 99.2, 99, 'Share And Sell'),
+--     (6, '2', 93.5, 98, 97.2, 96.5, 'Share And Sell'),
+--     (7, '3', 87, 94, 93, 92, 'Share And Sell'),
+--     (8, '4', 88, 85, 94, 92, 'Share And Sell')
+--     ON CONFLICT(aId) DO NOTHING;
 
 -- Create `apiconfigs` table
 CREATE TABLE IF NOT EXISTS apiconfigs (
@@ -33,10 +33,10 @@ CREATE TABLE IF NOT EXISTS apiconfigs (
 INSERT INTO apiconfigs (aId, name, value)
 VALUES
     (1, 'data_api', '49697ettdrd55555ggdd76ss77477ddssg6'),
-    (2, 'monifyApi', 'MK_PROD_FLX4P92EDF'),
-    (3, 'monifySecrete', 'RQDUNGNX17WTDRYAK2SH2RKTLNR38Y5Y'),
-    (13, 'mtnVtuKey', '49697ettdrd55555ggdd76ss77477ddssg6')
-    ON CONFLICT(aId) DO NOTHING;
+    (2, 'data_url', 'https://n3tdata.com/api'),
+    (3, 'monifyApi', 'MK_PROD_FLX4P92EDF'),
+    (4, 'monifySecrete', 'RQDUNGNX17WTDRYAK2SH2RKTLNR38Y5Y'),
+    (5, 'mtnVtuKey', '49697ettdrd55555ggdd76ss77477ddssg6');
 
 -- Create `dataplans` table
 CREATE TABLE IF NOT EXISTS dataplans (
@@ -129,8 +129,7 @@ VALUES
 (49, '2GB', '320', '320', '320', '320', '91', 'GIFTING', 3, '1'),
 (50, '3.5GB', '500', '500', '500', '500', '92', 'GIFTING', 3, '2'),
 -- GLO GIFTING Plan
-(51, '15GB', '2000', '2000', '2000', '2000', '93', 'GIFTING', 3, '7')
-    ON CONFLICT(pId) DO NOTHING;
+(51, '15GB', '2000', '2000', '2000', '2000', '93', 'GIFTING', 3, '7');
 
 -- Create `networkid` table
 CREATE TABLE IF NOT EXISTS networkid (
@@ -158,5 +157,4 @@ VALUES
     (1, '1', '1', '1', '1', '1', '1', 'MTN', 'On', 'On', 'On', 'On', 'On', 'On', 'On', 'On'),
     (3, '3', '3', '3', '3', '3', '3', 'GLO', 'On', 'On', 'On', 'On', 'On', 'On', 'On', 'On'),
     (4, '4', '4', '4', '4', '4', '4', '9MOBILE', 'On', 'On', 'On', 'On', 'On', 'On', 'On', 'On'),
-    (2, '2', '2', '2', '2', '2', '2', 'AIRTEL', 'On', 'On', 'On', 'On', 'On', 'On', 'On', 'On')
-    ON CONFLICT(nId) DO NOTHING;
+    (2, '2', '2', '2', '2', '2', '2', 'AIRTEL', 'On', 'On', 'On', 'On', 'On', 'On', 'On', 'On');

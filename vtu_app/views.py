@@ -13,6 +13,7 @@ from django.core.paginator import Paginator
 from django.core.mail import send_mail
 
 
+
 def generate_transaction_id():
     # Get current timestamp
     timestamp = datetime.datetime.now().strftime("%Y%m%d%H%M%S")

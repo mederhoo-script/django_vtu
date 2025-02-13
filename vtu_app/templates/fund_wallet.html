@@ -69,51 +69,50 @@
 </head>
 <body>
 
-    <!-- Sidebar -->
-    <div class="sidebar" id="sidebar">
-      <div class="d-flex " >  <a href='#'>
-        <button class="btn btn-dark toggle-btn" onclick="toggleSidebar()">
-            <i class="fas fa-bars"></i>
-        </button>
-        </a>
-        </div>
-        <br>
-        <a href="#">
-            <i class="fas fa-user"></i> <span>{{user.username}}</span>
-        </a>
-        <a href="{% url 'main_page' %}">
-            <i class="fas fa-home"></i> <span>Home</span>
-        </a>
-        <a href="#" style="background-color: {% if user.balance < 199 %}red{% else %}#4CAF50{% endif %};">
-            <i class="fas fa-balance-scale"></i> <span>Balance: &#8358;{{user.balance}}</span>
-        </a>
-        <a href="{% url 'fund_wallet' %}">
-            <i class="fas fa-wallet"></i> <span>Fund Wallet</span>
-        </a>
-        <a href="{% url 'buy_data' %}">
-    <i class="fas fa-database"></i> <span>Buy Data</span>
-</a>
-<a href="{% url 'buy_airtime' %}">
-    <i class="fas fa-phone-alt"></i> <span>Buy Airtime</span>
-</a>
+   <div class="d-flex pt-0">
+    <button class="btn btn-dark toggle-btn" onclick="toggleSidebar()">
+        <i class="fas fa-bars"></i>
+    </button>
+</div>
 
-        <a href="{% url 'profile' %}">
-            <i class="fas fa-user"></i> <span>Profile</span>
-        </a>
-         <a href="{% url 'transactions' %}">
-            <i class="fas fa-receipt"></i> <span>History</span>
-        </a>
-        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
-            <i class="fas fa-info-circle"></i> <span>About Us</span>
-        </a>
-        <ul class="dropdown-menu bg-dark text-white">
-            <li><a class="dropdown-item text-white" href="#">Our Team</a></li>
-            <li><a class="dropdown-item text-white" href="#">Contact</a></li>
-        </ul>
-        <a href="{% url 'logout' %}">
-            <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
-        </a>
-    </div>
+<!-- Collapsible Sidebar -->
+<div class="collapse sidebar pt-4" id="sidebar">
+    <br>
+    <a href="#">
+        <i class="fas fa-user"></i> <span>{{ user.username }}</span>
+    </a>
+    <a href="{% url 'main_page' %}">
+        <i class="fas fa-home"></i> <span>Home</span>
+    </a>
+    <a href="#" style="background-color: {% if user.balance < 199 %}red{% else %}#4CAF50{% endif %};">
+        <i class="fas fa-balance-scale"></i> <span>Balance: &#8358;{{ user.balance }}</span>
+    </a>
+    <a href="{% url 'fund_wallet' %}">
+        <i class="fas fa-wallet"></i> <span>Fund Wallet</span>
+    </a>
+    <a href="{% url 'buy_data' %}">
+        <i class="fas fa-database"></i> <span>Buy Data</span>
+    </a>
+    <a href="{% url 'buy_airtime' %}">
+        <i class="fas fa-phone-alt"></i> <span>Buy Airtime</span>
+    </a>
+    <a href="{% url 'profile' %}">
+        <i class="fas fa-user"></i> <span>Profile</span>
+    </a>
+    <a href="{% url 'transactions' %}">
+        <i class="fas fa-receipt"></i> <span>History</span>
+    </a>
+    <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">
+        <i class="fas fa-info-circle"></i> <span>About Us</span>
+    </a>
+    <ul class="dropdown-menu bg-dark text-white">
+        <li><a class="dropdown-item text-white" href="#">Our Team</a></li>
+        <li><a class="dropdown-item text-white" href="#">Contact</a></li>
+    </ul>
+    <a href="{% url 'logout' %}">
+        <i class="fas fa-sign-out-alt"></i> <span>Logout</span>
+    </a>
+</div>
 
     <a href="https://wa.me/2348034295030"
    target="_blank" id="whatsapp-button">
@@ -204,7 +203,7 @@
     <script>
         function toggleSidebar() {
             const sidebar = document.getElementById('sidebar');
-            sidebar.classList.toggle('collapsed');
+            sidebar.classList.toggle('show');
         }
     </script>
 </body>

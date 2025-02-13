@@ -124,11 +124,11 @@
 
         #whatsapp-button {
         position: fixed;
-        bottom: 20px;
-        right: 20px;
+        bottom: 42px;
+        right: 0px;
         background-color: #25d366;
         border-radius: 50%;
-        padding: 15px;
+        padding: 10px;
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         z-index: 9999; /* Ensure it stays on top */
     }
