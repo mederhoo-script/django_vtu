@@ -21,6 +21,10 @@
         .navbar1 { display: flex; justify-content: space-around; padding: 10px; background-color: #dc0bf7b2; position: fixed; bottom: 0; width: 100%; }
         .navbar1 a { text-decoration: none; color: #000; }
         .copy-button, .fund-button { padding: 5px 10px; background-color: #007bff; color: #fff; border: none; border-radius: 5px; cursor: pointer; }
+        .navbar1 a:hover {
+        opacity: 0.9;
+        background-color: green;
+        }
         
 
         .section-icons {
@@ -69,8 +73,8 @@
 <body class="bg-light">
 
     <!-- Navigation Bar -->
-       <nav class="navbar navbar-expand-sm" style="background-color: rgb(119, 0, 255);">
-        <div class="container-fluid">
+       <nav class="navbar navbar-expand-sm ps-0 pt-0" style="background-color: rgb(119, 0, 255);">
+        <div class="container-fluid ps-0">
 
         <!--logo-->
             <div class="logo-container bg-light btn pt-0">
@@ -101,7 +105,7 @@
       
 
         <!-- Wallet Card -->
-        <div class="card mb-4" style="border-radius: 20px; background-image: linear-gradient(to top, blue 0%, green 100%);">
+        <div class="card mb-4" style="border-radius: 20px; background-image: linear-gradient(to top, brown 0%, green 100%);">
             <div class="card-body text-white">
                 <div class="d-flex justify-content-between">
                     <h1>Hi, {{ user.username }}</h1> 
@@ -270,10 +274,10 @@
     </div>
 
     <div class="navbar1">
-        <a href="#">Home</a>
-        <a href="#">Airtime</a>
+        <a href="{% url 'main_page' %}">Home</a>
+        <a href="{% url 'buy_airtime' %}">Airtime</a>
         <a href="#">Contact</a>
-        <a href="#">Data</a>
+        <a href="{% url 'buy_data' %}">Data</a>
         <a href="#">Menu</a>
     </div>
 
