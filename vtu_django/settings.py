@@ -100,10 +100,12 @@ WSGI_APPLICATION = 'vtu_django.wsgi.application'
 
 DATABASES = {
     'default': {
-        "NAME": os.getenv('DB_NAME'),
         "ENGINE": "django.db.backends.mysql",
+        "NAME": os.getenv('DB_NAME'),
         "USER": os.getenv('DB_USER'),
         "PASSWORD": os.getenv('DB_PASS'),
+        'HOST': 'localhost',
+        'PORT': '3306',
     }
 }
 
@@ -151,6 +153,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
