@@ -38,7 +38,7 @@
                         dataPlanSelect.innerHTML = '<option value="">Select Plan</option>';
                         if (data.plans) {
                             data.plans.forEach(plan => {
-                                dataPlanSelect.innerHTML += `<option value="${plan.pId}" data-price="${plan.userprice}">${plan.name} ${plan.atype} = &#8358;${plan.userprice} (${plan.atype}) ${plan.day}days </option>`;
+                                dataPlanSelect.innerHTML += `<option value="${plan.planid}" data-price="${plan.userprice}">${plan.name} ${plan.atype} = &#8358;${plan.userprice} (${plan.atype}) ${plan.day}days </option>`;
                             });
                         }
                     });

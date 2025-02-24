@@ -205,7 +205,7 @@ def get_data_plans(request):
 
     if network_id and data_type:
         plans = DataPlan.objects.filter(datanetwork=network_id, atype=data_type)
-        plan_list = list(plans.values('pId', 'name', 'atype', 'userprice', 'day'))
+        plan_list = list(plans.values('planid', 'name', 'atype', 'userprice', 'day'))
 
         return JsonResponse({'plans': plan_list})
 
