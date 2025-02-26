@@ -1,5 +1,5 @@
 from django.http import JsonResponse
-from decimal import Decimal
+from decimal import Decimal, InvalidOperation
 import uuid
 import datetime
 from django.contrib import messages
@@ -11,7 +11,11 @@ from django.contrib.auth.decorators import login_required
 from .models import *
 from django.core.paginator import Paginator
 from django.core.mail import send_mail
+import logging
+from django.db import transaction
 
+
+logger = logging.getLogger(__name__)
 
 
 def generate_transaction_id():
@@ -211,90 +215,122 @@ def get_data_plans(request):
 
     return JsonResponse({'error': 'Invalid parameters'}, status=400)
 
+# buy data view
+
 @login_required
 def buy_data(request):
-    # getting api key from database
-    api_key = ApiConfig.objects.get(name='data_api')
+    try:
+        # Get the API key
+        api_key = ApiConfig.objects.get(name='data_api')
 
-    if request.method == 'POST':
-        network = request.POST.get('network')
-        data_plan = request.POST.get('dataplan')
-        phone = request.POST.get('phone')
-        bypass = request.POST.get('ported_number') == 'on'
-        amount_to_pay = request.POST.get('amounttopay')
-        request_id = generate_transaction_id()
-        pin = request.POST.get('transaction_pin')
-        user = request.user
-        print(f"network is {network}, data_plan: {data_plan}, phone: {phone}, bypass: {bypass}, amount_to_pay: {amount_to_pay}, request_id is {request_id}")
+        if request.method == 'POST':
+            # Extract form data
+            network = request.POST.get('network')
+            data_plan = request.POST.get('dataplan')
+            phone = request.POST.get('phone')
+            bypass = request.POST.get('ported_number') == 'on'
+            amount_to_pay = request.POST.get('amounttopay')
+            request_id = generate_transaction_id()
+            pin = request.POST.get('transaction_pin')
+            user = request.user
 
+            # Debugging: Print form data
+            print(f"network is {network}, data_plan: {data_plan}, phone: {phone}, bypass: {bypass}, amount_to_pay: {amount_to_pay}, request_id is {request_id}")
 
-        if pin != user.pin:
-            messages.error(request, 'Invalid transaction PIN. Please try again.')
+            # Validate transaction PIN
+            if pin != user.pin:
+                messages.error(request, 'Invalid transaction PIN. Please try again.')
+                return render(request, 'buy_data.html', {'data': NetworkID.objects.filter(networkStatus='On')})
+
+            # Validate amount_to_pay
+            try:
+                amount_to_pay = Decimal(amount_to_pay)
+            except InvalidOperation:
+                messages.error(request, 'Invalid amount.')
+                return render(request, 'buy_data.html', {'data': NetworkID.objects.filter(networkStatus='On')})
+
+            # Prepare API payload and headers
+            payload = {
+                'network': network,
+                'phone': phone,
+                'data_plan': data_plan,
+                'bypass': bypass,
+                'request-id': request_id
+            }
+            headers = {
+                'Authorization': f'Token {api_key}',
+                'Content-Type': 'application/json'
+            }
+
+            # Check user balance
+            if user.balance >= amount_to_pay:
+                try:
+                    url = 'https://n3tdata.com/api/data'
+                    # Make the API call
+                    response = requests.post(url, json=payload, headers=headers)
+                    print(f"after api{response}")
+
+                    res = response.json()
+
+                    # Log the API response
+                    logger.info(f'API Response: {res}')
+
+                    # Validate API response
+                    if not isinstance(res, dict) or 'status' not in res:
+                        messages.error(request, 'Invalid API response.')
+                        return redirect('buy_data')
+
+                    # If API call is successful
+                    if res.get('status') == 'success':
+                        with transaction.atomic():
+                            # Deduct balance and save user
+                            user.balance -= amount_to_pay
+                            user.save()
+
+                            # Create transaction record
+                            dis_data = DataPlan.objects.filter(datanetwork=network, planid=data_plan).first()
+                            if dis_data:
+                                Transactions.objects.create(
+                                    user=user,
+                                    service_name=f"{dis_data.atype} Data",
+                                    transaction_id=request_id,
+                                    amount=amount_to_pay,
+                                    status='completed',
+                                    description=f"{dis_data.name} {dis_data.atype} {dis_data.day} purchased for {phone}",
+                                    api_return_message=res
+                                )
+
+                        messages.success(request, 'You have successfully purchased data.')
+                    else:
+                        # If API call fails, show error message
+                        messages.error(request, f"Data purchase failed: {res.get('message', 'Unknown error')}")
+                except requests.exceptions.RequestException as e:
+                    # Handle network errors
+                    logger.error(f'Network error: {str(e)}')
+                    messages.error(request, f'Network error: Unable to complete the request. {str(e)}')
+                except ValueError as e:
+                    # Handle invalid API response
+                    logger.error(f'Invalid API response: {str(e)}')
+                    messages.error(request, 'Invalid response from the API.')
+                except Exception as e:
+                    # Handle other exceptions
+                    logger.error(f'Error in buy_data view: {str(e)}')
+                    messages.error(request, 'An internal error occurred.')
+            else:
+                # Insufficient balance
+                messages.error(request, 'Insufficient balance to complete the purchase.')
+
             return redirect('buy_data')
 
-        # Define the payload
-        payload = {
-            'network': network,
-            'phone': phone,
-            'data_plan': data_plan,
-            'bypass': bypass,
-            'request-id': generate_transaction_id()
-        }
+        # Fetch all networks where networkStatus is 'On'
+        data = NetworkID.objects.filter(networkStatus='On')
+        return render(request, 'buy_data.html', {'data': data})
 
-        # Define the headers
-        headers = {
-            'Authorization': f'Token {api_key}',
-            'Content-Type': 'application/json'
-        }
-
-        # Make the POST request
-        url = 'https://n3tdata.com/api/data'
-        user = request.user
-        if user.balance >= Decimal(amount_to_pay):
-            try:
-                # integete the api to buy data
-                response = requests.post(url, json=payload, headers=headers)
-
-                res = response.json()
-                if res.get('status') == 'success':
-                    print('from succes if', res)
-                    user.balance -= Decimal(amount_to_pay)
-                    user.save()
-                    dis_data = DataPlan.objects.filter(datanetwork=network, planid=data_plan).first()
-
-                    if dis_data:
-                        # get history
-                        transaction = Transactions.objects.create(
-                            user=user,
-                            service_name=f"{dis_data.atype} Data",
-                            transaction_id=request_id,
-                            amount=Decimal(amount_to_pay),
-                            status='completed',
-                            description=f"{dis_data.name} {dis_data.atype} {dis_data.day} purchased for {phone}",
-                            api_return_message=res
-                            )
-                        print(transaction)
-
-                    messages.success(request, 'You have successfully purchased data.')
-                else:
-                    messages.error(request, f"Data purchase failed: {res.get('message', 'Unknown error')}")
-            except Exception as e:
-                print('Network error: API call failed')
-                messages.error(request, 'Network error: Unable to complete the request.')
-        else:
-            messages.error(request, 'Insufficient balance to complete the purchase.')
-
+    except Exception as e:
+        # Handle unexpected exceptions
+        logger.error(f'Error in buy_data view: {str(e)}')
+        messages.error(request, 'An internal error occurred.')
         return redirect('buy_data')
-
-
-
-    # Fetch all networks where networkStatus is 'On'
-    data = NetworkID.objects.filter(networkStatus='On')
-
-    context = {
-        'data': data,
-    }
-    return render(request, 'buy_data.html', context)
 
 @login_required
 def transactions(request):
