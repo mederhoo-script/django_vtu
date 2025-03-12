@@ -17,6 +17,19 @@
 
     <link rel="stylesheet" href="{% static 'css/logo.css' %}">
 
+      <script>
+        setInterval(function () {
+            fetch("/get-messages/")  // Endpoint for fetching messages
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message) {
+                        alert(data.message);  // Show message instantly
+                    }
+                })
+                .catch(error => console.error("Error fetching messages:", error));
+        }, 5000);  // Check every 5 seconds
+    </script>
+
     <style>
         .header { display: flex; justify-content: space-between; align-items: center; padding: 10px; background-color: #f8f9fa; }
         .account-info, .balance, .section { padding: 10px; margin: 10px; background-color: #e9ecef; border-radius: 5px; }

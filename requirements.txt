@@ -3,4 +3,6 @@ requests
 python-dotenv
 djangorestframework
 gunicorn
-
+celery
+redis
+redis-server

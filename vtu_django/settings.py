@@ -116,6 +116,15 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'mederhoo@gmail.com'
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_PASS')
 
+# Redis broker for Celery
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+
+# Result backend (optional, used to track task results)
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+
+# Celery task settings (Optional)
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
 
 
 # Password validation
