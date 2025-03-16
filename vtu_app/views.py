@@ -15,6 +15,11 @@ from django.core.mail import send_mail
 import logging
 from django.db import transaction
 from django.contrib.messages import get_messages
+import os
+from dotenv import load_dotenv
+import json
+
+load_dotenv()
 
 logger = logging.getLogger(__name__)
 
@@ -126,7 +131,27 @@ def logout_view(request):
 
 @login_required
 def fund_wallet(request):
-    return render(request, 'fund_wallet.html')
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            transaction_data = data.get("data", {})
+            if transaction_data.get('status') == "SUCCESS":
+                amount = transaction_data.get('authorizedAmount')
+
+            # Process the transaction data (e.g., update the wallet balance)
+            print("Transaction Data:", transaction_data)
+
+            messages.success(request, 'Transaction received Check Your Balance')
+
+            return JsonResponse({"message": "Transaction received", "status": "success"})
+        except json.JSONDecodeError:
+            return JsonResponse({"message": "Invalid JSON data", "status": "error"}, status=400)
+
+    context = {
+        "api_key": os.getenv('MONNIFY_API_KEY_T'),
+        "contract_code": os.getenv('CONTRACT_CODE_T')
+    }
+    return render(request, 'fund_wallet.html', context)
 
 @login_required
 def buy_airtime(request):

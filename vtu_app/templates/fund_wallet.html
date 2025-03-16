@@ -33,6 +33,7 @@
     ></script>
     <script>
   function payWithMonnify() {
+  console.log("func click");
 
     var amounttofund = document.getElementById('amount').value;
 
@@ -40,14 +41,14 @@
     MonnifySDK.initialize({
       amount: amounttofund,
       currency: "NGN",
-      reference: new Date().getTime().toString()+"{{user.username}}",
-      customerFullName: "cvjknmmknbvcvb",
-      customerEmail: "dfghjhghg@gmail.com",
+      reference: new Date().getTime().toString()+"_{{user.username}}",
+      customerFullName: "{{user.first_name}} {{user.last_name}}",
+      customerEmail: "meder@gmail.com",
       apiKey: "{{api_key}}",
       contractCode: "{{contract_code}}",
       paymentDescription: "fund wallet",
       metadata: {
-        name: "tunde hgjk",
+        name: "{{user.first_name}}",
         age: 42,
       },
       onLoadStart: () => {
@@ -59,15 +60,20 @@
       onComplete: function (response) {
       const responseData = JSON.stringify(response);
 
-        fetch(`/fund_wallet/?data=${encodeURIComponent(responseData)}`)
-        console.log("on complete data");
-        console.log(response);
+        fetch(`/fund_wallet/`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": "{{ csrf_token }}"
+          },
+          body: JSON.stringify({ data: response })
+        })
+
       },
       onClose: function (data) {
-        // Implement what should happen when the modal is closed here
-        console.log("on close data");
-        console.log(data);
-      },
+            //Implement what should happen when the modal is closed here
+            console.log(data)
+            }
     });
   }
 </script>
@@ -212,26 +218,23 @@
 
                 <div class="tab-content mt-3">
                     <!-- Bank Tab -->
-                    <div class="tab-pane fade show active" id="bank">
+                    <div class="tab-pane fade" id="bank">
                         {% if 1 == 1 %}
                             <p><b>Bank Name:</b> Fidelity Bank</p>
                             <p><b>Account No:</b> <span class="text-danger sl"> Account Number not available Please switch to Auto tab</span></p>
                             <p class="text-danger"><b>Note:</b> Automated bank transfer attracts additional charges {{ charges_text }}.</p>
                             <button class="btn btn-primary" onclick="copyToClipboard('{{ fidelity_account }}')">Copy Account No</button>
                         {% endif %}
-                        {% if 1 == 1 %}
                             <p><b>Bank Name:</b> Moniepoint Bank</p>
                             <p><b>Account No:</b> <span class="text-danger sl"> Account Number not available Please switch to Auto tab</span></p>
                             <button class="btn btn-primary" onclick="copyToClipboard('{{ moniepoint_account }}')">Copy Account No</button>
-                        {% endif %}
                     </div>
                     <!-- Card Tab -->
-                    <div class="tab-pane fade" id="card">
+                    <div class="tab-pane fade show active" id="card">
                      <p class="mb-2 text-dark font-600 font-16">
                                 Pay with card, bank transfer, ussd, or bank deposit. Secured by Paystack
                             </p>
 
-                        {% if 1 == 1 %}
                             <form method="post">
                             {% csrf_token %}
 
@@ -244,9 +247,7 @@
       <button class="btn btn-success w-100" type="button" onclick="payWithMonnify()">Pay With Monnify</button>
     </div>
                             </form>
-                        {% else %}
-                            <h3 class="text-danger text-center">Paystack Payment is Disabled, Please Contact Admin </h3>
-                        {% endif %}
+
                     </div>
                     <!-- Manual Tab -->
                     <div class="tab-pane fade" id="manual">
