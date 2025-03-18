@@ -24,6 +24,7 @@ urlpatterns = [
     path('pricing', views.pricing, name='pricing'),
     path('submit-contact-form/', views.contact_view, name='contact_page'),
     path('coming_soon/', views.coming_soon, name='coming_soon'),
+    path('get_messages/', views.get_messages_view, name='get_messages'),
 
 
     # path('add-agent/', views.add_agent, name='add_agent'),

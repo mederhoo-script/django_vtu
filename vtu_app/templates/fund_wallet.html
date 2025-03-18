@@ -15,15 +15,16 @@
 
       <script>
         setInterval(function () {
-            fetch("/get-messages/")  // Endpoint for fetching messages
+            fetch("/get_messages/")  // Endpoint for fetching messages
                 .then(response => response.json())
                 .then(data => {
+                console.log(data)
                     if (data.message) {
                         alert(data.message);  // Show message instantly
                     }
                 })
                 .catch(error => console.error("Error fetching messages:", error));
-        }, 5000);  // Check every 5 seconds
+        }, 10000);  // Check every 5 seconds
     </script>
     
    <!-- monnify checkout-->
@@ -33,7 +34,6 @@
     ></script>
     <script>
   function payWithMonnify() {
-  console.log("func click");
 
     var amounttofund = document.getElementById('amount').value;
 
@@ -43,7 +43,7 @@
       currency: "NGN",
       reference: new Date().getTime().toString()+"_{{user.username}}",
       customerFullName: "{{user.first_name}} {{user.last_name}}",
-      customerEmail: "meder@gmail.com",
+      customerEmail: "{{user.email}}",
       apiKey: "{{api_key}}",
       contractCode: "{{contract_code}}",
       paymentDescription: "fund wallet",
@@ -70,10 +70,7 @@
         })
 
       },
-      onClose: function (data) {
-            //Implement what should happen when the modal is closed here
-            console.log(data)
-            }
+
     });
   }
 </script>
@@ -190,6 +187,12 @@
 </a>
 
 <div class="main-content">
+<div class="text-end">
+<a href="#">
+        Balance: &#8358;{{ user.balance }}
+    </a>
+    </div>
+
     <div class="container mt-5">
     <div class="logo-container mb-4 text-center p3">
             <div class="logo-text">
@@ -199,6 +202,28 @@
                 by Mederhoo Tech Limited
             </div>
         </div>
+
+        <!-- Display Messages -->
+    {% if messages %}
+        <div class="container mt-3">
+            {% for message in messages %}
+                <div class="alert alert-dismissible fade show" role="alert" style="
+                padding: 15px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+                color: white;
+                background-color: {% if message.tags == 'success' %} {{'green'}}
+                {% else %}
+               {{'red'}}
+               {% endif %}
+               ;
+            ">
+                    {{ message}}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 
         <div class="card">
             <div class="card-body">

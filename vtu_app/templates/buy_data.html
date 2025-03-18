@@ -17,7 +17,7 @@
 
       <script>
         setInterval(function () {
-            fetch("/get-messages/")  // Endpoint for fetching messages
+            fetch("/get_messages/")  // Endpoint for fetching messages
                 .then(response => response.json())
                 .then(data => {
                     if (data.message) {
@@ -25,7 +25,7 @@
                     }
                 })
                 .catch(error => console.error("Error fetching messages:", error));
-        }, 5000);  // Check every 5 seconds
+        }, 10000);  // Check every 10 seconds
     </script>
 
     <script>

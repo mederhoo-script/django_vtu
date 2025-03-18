@@ -33,9 +33,10 @@ def generate_transaction_id():
     transaction_id = f"TXN{timestamp}{unique_id}"
     return transaction_id
 
-def get_messages(request):
+def get_messages_view(request):
     storage = get_messages(request)
     messages_list = [message.message for message in storage]
+    print(messages_list)
     return JsonResponse({"message": messages_list[0] if messages_list else ""})
 
 def home(request):
@@ -131,21 +132,40 @@ def logout_view(request):
 
 @login_required
 def fund_wallet(request):
+    user = request.user
     if request.method == "POST":
         try:
             data = json.loads(request.body)
             transaction_data = data.get("data", {})
             if transaction_data.get('status') == "SUCCESS":
                 amount = transaction_data.get('authorizedAmount')
+                trans_ref = transaction_data.get('transactionReference')
+                pay_ref = transaction_data.get('paymentReference')
+                with transaction.atomic():
+                    user.balance += Decimal(amount)
+                    user.save()
+                # Create a transaction record
+                tnx = Transactions.objects.create(
+                    user=user,
+                    service_name='Airtime',
+                    transaction_id=f"pay_ref: {pay_ref}",
+                    amount=Decimal(amount),
+                    status='completed',
+                    description=f"Your wallet have been funded with {amount}. pay_ref: {pay_ref}, trans_ref: {trans_ref}",
+                    api_return_message=transaction_data
+                )
 
-            # Process the transaction data (e.g., update the wallet balance)
-            print("Transaction Data:", transaction_data)
+                print("Transaction Data:", transaction_data)
+                messages.success(request, 'Transaction received Check Your Balance')
+                return render(request, 'fund_wallet.html')
+            else:
+                messages.error(request, f"Transaction not success")
+                return render(request, 'fund_wallet.html')
 
-            messages.success(request, 'Transaction received Check Your Balance')
-
-            return JsonResponse({"message": "Transaction received", "status": "success"})
+            
         except json.JSONDecodeError:
-            return JsonResponse({"message": "Invalid JSON data", "status": "error"}, status=400)
+            messages.error(request, f"Transaction not success")
+            return render(request, 'fund_wallet.html')
 
     context = {
         "api_key": os.getenv('MONNIFY_API_KEY_T'),
