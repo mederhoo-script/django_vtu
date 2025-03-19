@@ -13,19 +13,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/logo.css' %}">
 
-      <script>
-        setInterval(function () {
-            fetch("/get_messages/")  // Endpoint for fetching messages
-                .then(response => response.json())
-                .then(data => {
-                console.log(data)
-                    if (data.message) {
-                        alert(data.message);  // Show message instantly
-                    }
-                })
-                .catch(error => console.error("Error fetching messages:", error));
-        }, 10000);  // Check every 5 seconds
-    </script>
     
    <!-- monnify checkout-->
    <script
@@ -68,8 +55,20 @@
           },
           body: JSON.stringify({ data: response })
         })
+        .then(data => {
+        if (response.status == 'SUCCESS') {
+       window.location.href = "{% url 'fund_wallet' %}?fund_status=success";
+        }
+
+    });
 
       },
+      onClose: function (data) {
+            if (data.status == 'FAILED') {
+           window.location.href = "{% url 'fund_wallet' %}?fund_status=failed";
+            }
+
+            }
 
     });
   }
@@ -218,7 +217,7 @@
                {% endif %}
                ;
             ">
-                    {{ message}}
+                    <span class="text-dark" style="background-color: red">NOTICE: </span> {{ message}}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             {% endfor %}

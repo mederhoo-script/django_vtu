@@ -34,6 +34,7 @@ def generate_transaction_id():
     return transaction_id
 
 def get_messages_view(request):
+
     storage = get_messages(request)
     messages_list = [message.message for message in storage]
     print(messages_list)
@@ -132,6 +133,11 @@ def logout_view(request):
 
 @login_required
 def fund_wallet(request):
+    fund_status = request.GET.get('fund_status')
+    if fund_status == 'success':
+        messages.success(request, 'Transaction received Check Your Balance')
+    elif fund_status == 'failed':
+        messages.error(request, "Transaction not success")
     user = request.user
     if request.method == "POST":
         try:
@@ -147,8 +153,8 @@ def fund_wallet(request):
                 # Create a transaction record
                 tnx = Transactions.objects.create(
                     user=user,
-                    service_name='Airtime',
-                    transaction_id=f"pay_ref: {pay_ref}",
+                    service_name='Wallet Funding',
+                    transaction_id=pay_ref,
                     amount=Decimal(amount),
                     status='completed',
                     description=f"Your wallet have been funded with {amount}. pay_ref: {pay_ref}, trans_ref: {trans_ref}",
@@ -168,8 +174,8 @@ def fund_wallet(request):
             return render(request, 'fund_wallet.html')
 
     context = {
-        "api_key": os.getenv('MONNIFY_API_KEY_T'),
-        "contract_code": os.getenv('CONTRACT_CODE_T')
+        "api_key": os.getenv('MONNIFY_API_KEY'),
+        "contract_code": os.getenv('CONTRACT_CODE')
     }
     return render(request, 'fund_wallet.html', context)
 
